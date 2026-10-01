@@ -38,15 +38,7 @@
 			</section>
 
 			<nav class="tabs" aria-label="Navegação do portfólio" role="tablist">
-
-				<div class="botcol">
-					<button class="tab is-active" id="tab-sobre" role="tab" aria-selected="true" aria-controls="sobre" data-tab="sobre">
-						<img style="background-color:#e6d0c1cc;" src="imagens/logo renato.png" alt="" class="imgar1">
-						<span>Sobre mim</span>
-					</button>
-				</div>
-
-				<button class="tab" id="tab-arla" role="tab" aria-selected="false" aria-controls="arla" data-tab="arla" data-theme="arla">
+				<button class="tab is-active" id="tab-arla" role="tab" aria-selected="true" aria-controls="arla" data-tab="arla" data-theme="arla">
 					<img src="imagens/Logo-Arla32-Eco.png" alt="" class="imgar2">
 					<span>Arla Eco 32</span>
 				</button>
@@ -55,10 +47,15 @@
 					<img src="imagens/bardahl.png" alt="" class="imgar2">
 					<span>Bardahl</span>
 				</button>
-
+				<div class="botcol">
+					<button class="tab" id="tab-sobre" role="tab" aria-selected="false" aria-controls="sobre" data-tab="sobre">
+						<img style="background-color:#e6d0c1cc;" src="imagens/logo renato.png" alt="" class="imgar1">
+						<span>Sobre mim</span>
+					</button>
+				</div>
 			</nav>
 
-			<section class="tab-panel about-panel is-visible" id="sobre" role="tabpanel" aria-labelledby="tab-sobre">
+			<section class="tab-panel about-panel" id="sobre" role="tabpanel" aria-labelledby="tab-sobre" hidden>
 				<div class="about-layout">
 					<img class="portrait" src="imagens/fotorenao.jpg" alt="Foto de Jeferson Renato em frente a um avião">
 					<div class="about-content">
@@ -71,7 +68,7 @@
 				</div>
 			</section>
 
-			<section class="tab-panel category-panel" id="arla" role="tabpanel" aria-labelledby="tab-arla" hidden>
+			<section class="tab-panel category-panel is-visible" id="arla" role="tabpanel" aria-labelledby="tab-arla">
 				<div class="panel-heading">
 					<div>
 						<p class="section-kicker">Linha pesada</p>
