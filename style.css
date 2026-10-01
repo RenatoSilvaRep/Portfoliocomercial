@@ -179,10 +179,54 @@ h2 { margin-bottom: 0; font-size: 36px; line-height: 1; letter-spacing: -.04em; 
 .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
 .category-panel .product-grid { grid-template-columns: repeat(2, minmax(0, 360px)); }
 .product-card { min-width: 0; }
+@media (max-width: 680px) {
+	.product-grid,
+	.category-panel .product-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 12px;
+	}
+
+	.product-image {
+		height: 180px;
+		margin-bottom: 12px;
+	}
+
+	.product-info h3 {
+		font-size: 15px;
+	}
+
+	.product-description {
+		font-size: 12px;
+	}
+}
 .product-image { position: relative; height: 300px; margin-bottom: 18px; overflow: hidden; background: #d8dfd6; }
 .product-image::before, .product-image::after { position: absolute; content: ""; }
+.product-image img {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
 .image-label { position: absolute; z-index: 1; top: 13px; left: 13px; padding: 7px 10px; color: var(--dark-green); background: var(--accent); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
-.product-number { position: absolute; right: 14px; bottom: 12px; color: rgba(255,255,255,.85); font-family: "Space Grotesk"; font-size: 11px; font-weight: 700; }
+.product-number { position: absolute; right: 14px; bottom: 12px; color: rgba(255,255,255,.85); font-family: "Space Grotesk"; font-size: 11px; font-weight: 700; z-index: 1; }
+.product-image-arla-01,
+.product-image-arla-02,
+.product-image-arla-03,
+.product-image-arla-04 {
+	background: #eaf3e5;
+}
+.product-image-arla-01::before,
+.product-image-arla-02::before,
+.product-image-arla-03::before,
+.product-image-arla-04::before,
+.product-image-arla-01::after,
+.product-image-arla-02::after,
+.product-image-arla-03::after,
+.product-image-arla-04::after {
+	display: none;
+}
 .image-camera { background: #b5c9b0; }
 .image-camera::before { width: 155px; height: 112px; left: 50%; top: 50%; background: #253d32; border-radius: 17px; transform: translate(-50%, -40%) rotate(-8deg); box-shadow: 12px 18px 0 rgba(49,83,65,.3); }
 .image-camera::after { width: 48px; height: 48px; left: 50%; top: 50%; border: 8px solid #d6e0d3; border-radius: 50%; transform: translate(-50%, -40%); }
