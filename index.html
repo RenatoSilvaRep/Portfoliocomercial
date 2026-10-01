@@ -185,6 +185,8 @@
 		const tabs = document.querySelectorAll('.tab');
 		const panels = document.querySelectorAll('.tab-panel');
 
+		pageShell.classList.add('theme-arla');
+
 		tabs.forEach((tab) => {
 			tab.addEventListener('click', () => {
 				const target = tab.dataset.tab;
