@@ -249,27 +249,30 @@ h2 { margin-bottom: 0; font-size: 36px; line-height: 1; letter-spacing: -.04em; 
 .portrait { cursor: zoom-in; }
 .image-lightbox {
 	position: fixed;
+	width: fit-content;
 	max-width: min(94vw, 1200px);
 	max-height: 94vh;
-	padding: 48px 16px 16px;
-	overflow: visible;
+	max-height: 94dvh;
+	padding: 52px 12px 12px;
+	overflow: hidden;
 	border: 0;
 	background: transparent;
 }
 .image-lightbox::backdrop { background: rgba(0, 0, 0, .82); }
 .image-lightbox img {
 	display: block;
-	max-width: 90vw;
-	max-height: 86vh;
+	max-width: calc(94vw - 24px);
+	max-height: calc(94vh - 64px);
+	max-height: calc(94dvh - 64px);
 	object-fit: contain;
 }
 .image-lightbox-close {
 	position: absolute;
-	top: 4px;
-	right: 4px;
+	top: 6px;
+	right: 6px;
 	display: grid;
-	width: 40px;
-	height: 40px;
+	width: 44px;
+	height: 44px;
 	place-items: center;
 	color: #fff;
 	background: rgba(0, 0, 0, .55);
@@ -279,6 +282,20 @@ h2 { margin-bottom: 0; font-size: 36px; line-height: 1; letter-spacing: -.04em; 
 	cursor: pointer;
 }
 .image-lightbox-close:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+@media (max-width: 480px) {
+	.image-lightbox {
+		max-width: 100vw;
+		max-height: 100vh;
+		max-height: 100dvh;
+		padding: 56px 8px 8px;
+	}
+	.image-lightbox img {
+		max-width: calc(100vw - 16px);
+		max-height: calc(100vh - 72px);
+		max-height: calc(100dvh - 72px);
+	}
+	.image-lightbox-close { top: 6px; right: 6px; }
+}
 .image-label { position: absolute; z-index: 1; top: 13px; left: 13px; padding: 7px 10px; color: var(--dark-green); background: var(--accent); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
 .product-number { position: absolute; right: 14px; bottom: 12px; color: rgba(255,255,255,.85); font-family: "Space Grotesk"; font-size: 11px; font-weight: 700; z-index: 1; }
 .product-image-arla-01,
