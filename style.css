@@ -22,6 +22,29 @@ body {
 button, a { font: inherit; }
 a { color: inherit; text-decoration: none; }
 
+.back-to-top {
+	position: fixed;
+	right: 24px;
+	bottom: 24px;
+	z-index: 10;
+	display: grid;
+	width: 48px;
+	height: 48px;
+	place-items: center;
+	color: var(--paper);
+	background: var(--dark-green);
+	border-radius: 50%;
+	box-shadow: 0 4px 14px rgba(0, 0, 0, .22);
+	font-size: 27px;
+	line-height: 1;
+	transition: transform .2s ease, background-color .2s ease;
+}
+.back-to-top:hover {
+	background: #2e4d3f;
+	transform: translateY(-3px);
+}
+.back-to-top:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
 .page-shell {
 	width: 100%;
 	max-width: none;
@@ -90,6 +113,7 @@ a { color: inherit; text-decoration: none; }
 	font-weight: 700;
 	transition: transform .4s cubic-bezier(.2,.8,.2,1), color .3s ease, opacity .3s ease;
 }
+.whatsapp-icon { width: 20px; height: 20px; object-fit: contain; }
 .whatsapp-link:hover {
 	color: #0d6b2d;
 	transform: translateY(-4px) scale(1.02);
@@ -220,7 +244,41 @@ h2 { margin-bottom: 0; font-size: 36px; line-height: 1; letter-spacing: -.04em; 
 	height: 100%;
 	object-fit: cover;
 	display: block;
+	cursor: zoom-in;
 }
+.portrait { cursor: zoom-in; }
+.image-lightbox {
+	position: fixed;
+	max-width: min(94vw, 1200px);
+	max-height: 94vh;
+	padding: 48px 16px 16px;
+	overflow: visible;
+	border: 0;
+	background: transparent;
+}
+.image-lightbox::backdrop { background: rgba(0, 0, 0, .82); }
+.image-lightbox img {
+	display: block;
+	max-width: 90vw;
+	max-height: 86vh;
+	object-fit: contain;
+}
+.image-lightbox-close {
+	position: absolute;
+	top: 4px;
+	right: 4px;
+	display: grid;
+	width: 40px;
+	height: 40px;
+	place-items: center;
+	color: #fff;
+	background: rgba(0, 0, 0, .55);
+	border: 0;
+	border-radius: 50%;
+	font-size: 28px;
+	cursor: pointer;
+}
+.image-lightbox-close:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 .image-label { position: absolute; z-index: 1; top: 13px; left: 13px; padding: 7px 10px; color: var(--dark-green); background: var(--accent); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
 .product-number { position: absolute; right: 14px; bottom: 12px; color: rgba(255,255,255,.85); font-family: "Space Grotesk"; font-size: 11px; font-weight: 700; z-index: 1; }
 .product-image-arla-01,
