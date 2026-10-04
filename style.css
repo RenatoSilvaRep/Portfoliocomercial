@@ -255,6 +255,8 @@ h2 { margin-bottom: 0; font-size: 36px; line-height: 1; letter-spacing: -.04em; 
 	display: block;
 	cursor: zoom-in;
 }
+.bardahl-product-image { background: #f4f1eb; }
+.bardahl-product-image img { padding: 12px; object-fit: contain; }
 .portrait { cursor: zoom-in; }
 .image-lightbox {
 	position: fixed;
