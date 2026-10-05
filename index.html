@@ -66,6 +66,16 @@
 					<a class="primary-button" href="https://wa.me/5587991021576" target="_blank" rel="noopener">Vamos conversar <img class="whatsapp-icon" src="imagens/whatsapp.png" alt=""></a>
 				</div>
 			</div>
+			<section class="company-experience" aria-labelledby="companies-title">
+				<p class="section-kicker">TRAJETÓRIA</p>
+				<h2 id="companies-title">Empresas com que já trabalhei</h2>
+				<p class="company-instruction">Clique em uma logo para ver um resumo da minha atuação.</p>
+				<div class="company-tabs" id="companyTabs" role="tablist" aria-label="Empresas"></div>
+				<div class="company-description" id="companyDescription" role="tabpanel" aria-live="polite" hidden>
+					<h3 id="companyDescriptionTitle"></h3>
+					<p id="companyDescriptionText"></p>
+				</div>
+			</section>
 		</section>
 
 		<section class="tab-panel category-panel is-visible" id="arla" role="tabpanel" aria-labelledby="tab-arla">
@@ -146,7 +156,10 @@
 					<p class="product-description">Produto de alta confiabilidade para uso recorrente em frota pesada.</p></div></div>
 				</article>
 			</div>
-			<P>renatosilva.r@hotmail.com</P>
+			<div class="email-contact">
+				<span class="email-contact-label">E-mail para contato:</span>
+				<a href="mailto:renatosilva.r@hotmail.com">renatosilva.r@hotmail.com</a>
+			</div>
 		</section>
 
 		<section class="tab-panel category-panel" id="bardahl" role="tabpanel" aria-labelledby="tab-bardahl" hidden>
@@ -231,7 +244,10 @@
 				<div class="cat-tabs" id="catTabs" role="tablist" aria-label="Categorias Bardahl"></div>
 				<div id="catPanels"></div>
 			</div>
-			<P>jefferson.renato@distribuidorabasteca.com.br</P>
+			<div class="email-contact">
+				<span class="email-contact-label">E-mail para contato:</span>
+				<a href="mailto:jefferson.renato@distribuidorabasteca.com.br">jefferson.renato@distribuidorabasteca.com.br</a>
+			</div>
 		</section>
 	</main>
 	<footer><span>Renato Silva Representação</span><span class="footer-tagline">Feito para boas escolhas.</span>
@@ -296,12 +312,123 @@ tabs.forEach((tab) => {
 	});
 });
 
+const empresas = [
+	{ nome: 'Ferreira Costa', logo: 'imagens/sobremim/ferreiracosta.png' },
+	{ nome: 'Dancor', logo: 'imagens/sobremim/dancor.png' },
+	{ nome: 'Suvinil', logo: 'imagens/sobremim/suvinil.png' },
+	{ nome: 'Chiaperini', logo: 'imagens/sobremim/chiaperini.png' },
+	{ nome: 'Hydronlubz', logo: 'imagens/sobremim/hydronlubz.png' },
+	{ nome: 'Shell', logo: 'imagens/sobremim/sheel.png' },
+	{ nome: 'Gasoleo', logo: 'imagens/sobremim/gasoleo.png' },
+	{ nome: 'Flach', logo: 'imagens/sobremim/flach.png' },
+	{ nome: 'Gulf', logo: 'imagens/sobremim/gulf.png' }
+];
+const companyTabs = document.getElementById('companyTabs');
+const companyDescription = document.getElementById('companyDescription');
+const companyDescriptionTitle = document.getElementById('companyDescriptionTitle');
+const companyDescriptionText = document.getElementById('companyDescriptionText');
+const companyTabButtons = [];
+
+empresas.forEach((empresa, index) => {
+	const button = document.createElement('button');
+	button.type = 'button';
+	button.className = 'company-tab';
+	button.id = `company-tab-${index}`;
+	button.setAttribute('role', 'tab');
+	button.setAttribute('aria-controls', companyDescription.id);
+	button.setAttribute('aria-selected', 'false');
+	button.tabIndex = index === 0 ? 0 : -1;
+	button.setAttribute('aria-label', empresa.nome);
+
+	const logo = document.createElement('img');
+	logo.src = empresa.logo;
+	logo.alt = '';
+	logo.setAttribute('aria-hidden', 'true');
+	const name = document.createElement('span');
+	name.textContent = empresa.nome;
+	button.append(logo, name);
+	companyTabs.appendChild(button);
+	companyTabButtons.push(button);
+
+	button.addEventListener('click', () => {
+		companyTabButtons.forEach((tab) => {
+			const selected = tab === button;
+			tab.setAttribute('aria-selected', selected);
+			tab.tabIndex = selected ? 0 : -1;
+		});
+		companyDescription.setAttribute('aria-labelledby', button.id);
+		companyDescriptionTitle.textContent = empresa.nome;
+		companyDescriptionText.textContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vitae eros eget tellus tristique bibendum. Donec rutrum sed sem quis venenatis.';
+		companyDescription.hidden = false;
+	});
+});
+
+companyTabs.addEventListener('keydown', (event) => {
+	const currentIndex = companyTabButtons.indexOf(document.activeElement);
+	if (currentIndex < 0) return;
+
+	let nextIndex;
+	if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % companyTabButtons.length;
+	else if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + companyTabButtons.length) % companyTabButtons.length;
+	else if (event.key === 'Home') nextIndex = 0;
+	else if (event.key === 'End') nextIndex = companyTabButtons.length - 1;
+	else return;
+
+	event.preventDefault();
+	companyTabButtons[currentIndex].tabIndex = -1;
+	companyTabButtons[nextIndex].tabIndex = 0;
+	companyTabButtons[nextIndex].focus();
+});
 
 const bardahlCategorias = [
-	{ id: 'combustivel', nome: 'Aditivo Combustível', total: 10, items: [] },
-	{ id: 'motor',       nome: 'Aditivo Motor',       total: 5,  items: [] },
-	{ id: 'radiador',    nome: 'Aditivo Radiador',    total: 3,  items: [] },
-	{ id: 'moto',        nome: 'Lubrificante Moto',   total: 2,  items: [] }
+	{
+		id: 'combustivel',
+		nome: 'Aditivo Combustível',
+		total: 10,
+		items: [
+			{ nome: 'CLEAN GAS', img: 'imagens/produtos/bardahl/CLEAN20GAS.png' },
+			{ nome: 'FLEX', img: 'imagens/produtos/bardahl/BARDAHL FLEX.png' },
+			{ nome: 'MAX TOP', img: 'imagens/produtos/bardahl/MAXTOP.png' },
+			{ nome: 'SPECIAL 6X1' },
+			{ nome: 'MAX HYBRID', img: 'imagens/produtos/bardahl/MAX20HYBRID.png' },
+			{ nome: 'PROAL', img: 'imagens/produtos/bardahl/BARDAHL PROAL.png' },
+			{ nome: 'MAX POWER MOTO' },
+			{ nome: 'MAX DIESEL', img: 'imagens/produtos/bardahl/MAX20DIESEL.png' },
+			{ nome: 'MAX S10', img: 'imagens/produtos/bardahl/BARDAHL MAX S10.png' },
+			{ nome: 'MAX POWER DIESEL' }
+		]
+	},
+	{
+		id: 'motor',
+		nome: 'Aditivo Motor',
+		total: 5,
+		items: [
+			{ nome: 'B12 PREMIUM', img: 'imagens/produtos/bardahl/B122020Premium.png' },
+			{ nome: 'B12 TURBO', img: 'imagens/produtos/bardahl/B122020TURBO.png' },
+			{ nome: 'B12', img: 'imagens/produtos/bardahl/CONDICIONADOR.png' },
+			{ nome: 'CONDICIONADOR DE METAIS', img: 'imagens/produtos/bardahl/B12.png' },
+			{ nome: 'PROLONGA', img: 'imagens/produtos/bardahl/PROLONGA.png' }
+		]
+	},
+	{
+		id: 'radiador',
+		nome: 'Aditivo Radiador',
+		total: 3,
+		items: [
+			{ nome: 'RAD COOL CONCENTRADO', img: 'imagens/produtos/bardahl/RAD20COOL.png' },
+			{ nome: 'RAD COOL PRONTO USO', img: 'imagens/produtos/bardahl/RAD20COOL20PRONTO20PRA20USO201L.png' },
+			{ nome: 'FLUIDO', img: 'imagens/produtos/bardahl/FLUIDO20ROSA201L.png' }
+		]
+	},
+	{
+		id: 'moto',
+		nome: 'Lubrificante Moto',
+		total: 2,
+		items: [
+			{ nome: 'MAXTEC 20W50', img: 'imagens/produtos/bardahl/MAXTEC20PERFORMANCE20MOTO2020W50.png' },
+			{ nome: 'MAXTEC 10W30', img: 'imagens/produtos/bardahl/MAXTEC20PERFORMANCE20MOTO2010W30.png' }
+		]
+	}
 ];
 
 const catTabs = document.getElementById('catTabs');

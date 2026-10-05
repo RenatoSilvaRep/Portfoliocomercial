@@ -659,6 +659,24 @@ h3 {
   line-height: 1.5;
 }
 
+.email-contact {
+  margin: 32px auto 0;
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.email-contact-label {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.email-contact a {
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
 /* ===== Lightbox ===== */
 .portrait {
   cursor: zoom-in;
@@ -743,6 +761,104 @@ h3 {
 
 .about-panel .stats span {
   color: #65564f;
+}
+
+.company-experience {
+  max-width: 960px;
+  margin: 60px auto 0;
+  padding: 0 30px 20px;
+  color: #30251f;
+}
+
+.company-experience .section-kicker {
+  margin-bottom: 8px;
+}
+
+.company-experience h2 {
+  font-size: clamp(28px, 4vw, 38px);
+}
+
+.company-instruction {
+  margin: 12px 0 22px;
+  color: #65564f;
+  font-size: 14px;
+}
+
+.company-tabs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
+  gap: 12px;
+}
+
+.company-tab {
+  display: flex;
+  min-width: 0;
+  min-height: 94px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  color: #51433b;
+  background: rgba(255, 255, 255, .32);
+  border: 1px solid #bda99a;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.company-tab img {
+  display: block;
+  width: 100%;
+  max-width: 140px;
+  height: 42px;
+  object-fit: contain;
+}
+
+.company-tab span {
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.company-tab:hover {
+  background: rgba(255, 255, 255, .65);
+  transform: translateY(-2px);
+}
+
+.company-tab[aria-selected="true"] {
+  background: #d9bdab;
+  border-color: #76513f;
+  box-shadow: inset 0 0 0 1px rgba(118, 81, 63, .12);
+}
+
+.company-tab:focus-visible {
+  outline: 3px solid #76513f;
+  outline-offset: 3px;
+}
+
+.company-description {
+  margin-top: 18px;
+  padding: 20px 22px;
+  background: rgba(255, 255, 255, .34);
+  border-left: 3px solid #76513f;
+  border-radius: 4px 12px 12px 4px;
+}
+
+.company-description[hidden] {
+  display: none;
+}
+
+.company-description h3 {
+  margin-bottom: 8px;
+  color: #30251f;
+}
+
+.company-description p {
+  max-width: 700px;
+  margin: 0;
+  color: #51433b;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 .portrait {
