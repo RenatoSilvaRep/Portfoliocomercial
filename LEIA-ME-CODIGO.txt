@@ -1,0 +1,452 @@
+GUIA DE LEITURA DO PORTFOLIO
+============================
+
+Este documento explica o HTML, o CSS e o JavaScript usados no site. Os
+numeros indicados sao linhas dos arquivos atuais:
+
+  index.html  - estrutura e conteudo da pagina
+  style.css   - aparencia, cores, espacamentos e adaptacao a telas
+  script.js   - interacoes e conteudo criado dinamicamente
+
+Os numeros podem mudar se os arquivos forem editados. Linhas vazias servem
+somente para organizar e separar visualmente o codigo. Em HTML, CSS e
+JavaScript, chaves e tags de fechamento encerram blocos iniciados antes.
+
+
+1. HTML: index.html (265 linhas)
+===============================
+
+1      <!DOCTYPE html>
+       Declara o documento como HTML5 para o navegador.
+2      <html lang="pt-BR">
+       Inicia o documento e informa que o idioma principal e portugues do
+       Brasil. Isso ajuda leitores de tela e mecanismos de busca.
+3      <head>
+       Abre a area de configuracoes e metadados, que nao e o conteudo
+       principal mostrado dentro da pagina.
+4      <meta charset="UTF-8">
+       Define a codificacao que permite acentos e caracteres especiais.
+5      <meta name="viewport" ...>
+       Faz o layout respeitar a largura do dispositivo, essencial para
+       celulares.
+6      <meta name="description" ...>
+       Fornece uma descricao curta da pagina para mecanismos de busca.
+7      <title>...</title>
+       Define o titulo exibido na aba do navegador.
+8-10   <link rel="preconnect"...> e fontes
+       Antecipam conexoes ao Google Fonts e carregam DM Sans e Space
+       Grotesk, usadas no desenho do texto.
+11-14  Links de icones e manifest
+       Informam icones para favoritos, tela inicial de dispositivos e
+       metadados de instalacao. Os arquivos apontados ficam em imagens/.
+15     <link rel="stylesheet" href="style.css">
+       Carrega o arquivo externo com as regras de estilo.
+16     Linha vazia para legibilidade.
+17     </head>
+       Fecha as configuracoes do documento.
+18     <body>
+       Inicia todo o conteudo visivel e interativo da pagina.
+19     <div class="page-shell">
+       Contem a pagina inteira; a classe tambem recebe temas visuais por
+       meio do JavaScript.
+
+20-30  Cabecalho (header.topbar)
+       A linha 20 cria o cabecalho e o id="top" serve como destino do link
+       "voltar ao topo". O link da marca leva a secao Sobre; spans separam o
+       monograma "R" e o nome. A area header-actions reune disponibilidade
+       comercial e o link de WhatsApp. target="_blank" abre outra aba;
+       rel="noopener" isola a nova aba; aria-label descreve o link para
+       acessibilidade; a imagem WhatsApp tem alt vazio pois o texto do link
+       ja informa sua finalidade.
+
+32     <main>
+       Marca o conteudo principal da pagina.
+32-39  Introducao (section.intro)
+       A secao associa seu titulo acessivel pelo atributo aria-labelledby.
+       eyebrow e o rotulo pequeno; h1 e o titulo principal; br quebra a linha
+       e em destaca visualmente um trecho. intro-copy e o texto de
+       apresentacao. O link contact-link abre uma conversa pelo WhatsApp.
+
+41-56  Navegacao em abas
+       nav.tabs e a lista de controles. role="tablist" informa tecnologias
+       assistivas de que os botoes formam um conjunto de abas. Cada button
+       possui id, role="tab", aria-selected (se esta selecionado),
+       aria-controls (painel que controla) e data-tab (id que o JavaScript
+       usa para mostrar o painel). data-theme indica o tema de cor. As
+       imagens dos botoes tem alt vazio por serem decorativas junto ao texto.
+       botcol e apenas um contenedor para organizar a terceira aba.
+
+58-79  Painel Sobre
+       section#sobre e o painel controlado pela aba Sobre; hidden esconde o
+       painel inicialmente. about-layout organiza foto e biografia. A foto
+       inclui texto alternativo. about-content traz titulo, apresentacao,
+       metricas e botao de contato. A secao company-experience apresenta a
+       trajetoria profissional. companyTabs e companyDescription sao
+       contenedores vazios: script.js cria botoes de empresas e preenche
+       sua descricao. aria-live="polite" pede que leitores de tela anunciem
+       a descricao atual sem interromper.
+
+81-163  Painel Arla Eco 32
+       section#arla e o painel de produtos inicialmente visivel. O cabecalho
+       identifica o produto, mostra o logo e uma chamada comercial. product-
+       grid contem varios article.product-card, um por produto. Cada cartao
+       inclui imagem, numero, categoria, nome e descricao; image-label marca
+       o mais procurado. Classes product-image-arla-* permitem estilos
+       especificos. A sequencia de cartoes compartilha a mesma estrutura e
+       muda principalmente imagem, rotulo e texto. O bloco email-contact
+       fornece um link mailto para abrir o programa de e-mail.
+
+165-251  Painel Bardahl
+       section#bardahl comeca escondida e e mostrada quando sua aba e
+       selecionada. panel-heading traz chamada e logo. product-grid repete
+       a estrutura de cartao, agora com imagens e nomes Bardahl. O atributo
+       style em cada imagem define diretamente sua cor de fundo. O botao
+       bardahlMore controla a area expandida: aria-expanded representa seu
+       estado e aria-controls liga o botao ao elemento bardahlExtra. Dentro
+       da area extra, catTabs e catPanels serao preenchidos pelo JavaScript
+       com abas de categorias e listas de produtos. O e-mail final e outro
+       link mailto.
+
+252-255  Rodape
+       footer encerra o conteudo da pagina; os spans mostram nome comercial,
+       frase de marca e credito.
+
+257-260  Janela de imagem ampliada
+       dialog e uma janela modal nativa do navegador. O botao fecha a janela
+       e &times; e o simbolo de fechar. O img vazio recebe endereco e texto
+       alternativo pelo script quando uma foto e clicada.
+
+261     <a class="back-to-top"...>
+       Link fixo para o id="top". hidden o deixa oculto ate o script detectar
+       que a pagina foi rolada. A seta tem aria-hidden pois o proprio link
+       ja possui aria-label.
+263     <script src="script.js"></script>
+       Carrega o JavaScript externo no fim do body, quando os elementos HTML
+       usados pelo script ja foram criados.
+265     </body> / </html>
+       Fecham o corpo e o documento.
+
+NOTAS DE ATRIBUTOS HTML
+-----------------------
+class associa elementos a regras CSS. id identifica um elemento de forma
+unica e serve a links, acessibilidade e consultas do JavaScript. href define
+o destino de um link; src indica o arquivo de uma imagem ou script. alt
+fornece texto alternativo para imagens. hidden esconde um elemento.
+aria-* complementa a acessibilidade; data-* guarda dados usados pelo script.
+article representa um item independente, section agrupa conteudo tematico,
+nav e a navegacao, main e o conteudo principal, e footer e o rodape.
+
+
+2. CSS: style.css (1357 linhas)
+===============================
+
+COMO LER AS REGRAS
+------------------
+Uma regra CSS tem um seletor entre chaves e declaracoes dentro dele. O
+seletor escolhe elementos; cada declaracao e propriedade: valor. Por exemplo,
+color: red altera a cor do texto. Ponto e virgula encerra uma declaracao,
+chaves encerram uma regra e virgulas permitem agrupar seletores. Linhas
+vazias e comentarios /* ... */ nao alteram o desenho.
+
+LINHAS 1-9: CORES REUTILIZAVEIS
+  :root define variaveis globais --ink, --muted, --line, --paper, --cream,
+  --accent e --dark-green. Elas centralizam cores que podem ser reutilizadas
+  com var(--nome).
+
+LINHAS 11-13: * { box-sizing: border-box }
+  Inclui borda e preenchimento nas dimensoes declaradas dos elementos,
+  tornando mais previsivel o calculo de largura e altura.
+
+LINHAS 15-17: html
+  scroll-behavior: smooth faz links internos rolarem suavemente.
+
+LINHAS 19-25: body
+  Remove a margem padrao; define cor de texto, fundo e fonte base do site.
+
+LINHAS 27-29: button, a
+  Faz botoes e links herdarem a fonte definida no restante da pagina.
+
+LINHAS 31-34: a
+  Mantem a cor herdada e remove o sublinhado padrao dos links.
+
+LINHAS 36-67: botao voltar ao topo
+  .back-to-top fixa o link no canto inferior direito, define tamanho,
+  centraliza a seta com grid, adiciona fundo, borda redonda, sombra e
+  transicao. [hidden] garante que o estado hidden realmente nao apareca.
+  :hover muda o fundo e move o botao para cima. :focus-visible desenha um
+  contorno para navegacao por teclado.
+
+LINHAS 69-93: contenedor e temas
+  .page-shell ocupa a largura disponivel, cobre pelo menos a altura da tela,
+  centraliza e aplica margens internas responsivas. overflow oculta excesso;
+  transition suaviza a troca de cor. .theme-arla, .theme-bardahl e
+  .theme-about mudam fundo e cor de texto para cada aba selecionada.
+
+LINHAS 95-119: tema Sobre
+  Recolore bordas do cabecalho, abas e rodape. Regras para .tab, .tab.is-active
+  e :hover definem cores de estado normal, selecionado e sob o ponteiro.
+  :focus-visible ajusta o contorno de foco ao tema.
+
+LINHAS 121-183: tema Bardahl
+  Aplica contornos dourados e cores legiveis para textos, destaques, abas,
+  link de contato, WhatsApp e indicador de disponibilidade. Os seletores
+  compostos restringem essas alteracoes ao shell com theme-bardahl.
+
+LINHAS 185-244: tema Arla
+  Faz o mesmo para o tema verde: bordas, textos secundários, titulos em
+  destaque, abas normais/ativas/hover/foco, link de contato e ponto de
+  disponibilidade.
+
+LINHAS 246-317: cabecalho e contatos
+  .topbar usa flexbox para distribuir marca e acoes, alinhar verticalmente e
+  separar com borda inferior. .brand organiza icone e nome; .brand-mark
+  desenha o circulo com a letra. .availability define o texto de status;
+  .status-dot desenha o pequeno ponto redondo. .header-actions alinha status
+  e link lado a lado. .whatsapp-link alinha icone e texto, cores e animacoes;
+  .whatsapp-icon controla tamanho e ajuste da imagem. :hover escurece o link.
+
+LINHAS 319-404: introducao
+  .intro usa flexbox para distribuir texto e contato e aplica espacamento
+  adaptavel via clamp(minimo, preferido, maximo). .eyebrow, .section-kicker
+  e .category compartilham estilo de rotulo: margem, cor, tamanho, peso,
+  espaco entre letras e maiusculas. .eyebrow span estiliza o separador.
+  h1/h2/h3/p removem margem superior; titulos usam Space Grotesk. h1 limita
+  largura e dimensiona fonte com clamp, altura de linha e espaco entre letras.
+  em nesses titulos recebe cor mas nao fica em italico. .intro-copy controla
+  largura, cor, tamanho e leitura. .contact-link monta link com icone,
+  sublinhado de borda e transicao. Os tres seletores hover movem links e
+  botao; .contact-link:hover tambem ajusta sua cor e borda.
+
+LINHAS 406-503: abas, paineis e animacao
+  .tabs organiza botoes sem quebra em linha e desenha divisoria. .botcol usa
+  display: contents para o contenedor nao gerar caixa propria no layout.
+  .tab define alinhamento em coluna, tamanho, fundo, borda, cursor e
+  transicoes. .tab img ajusta logos dentro do botao; imgar1 e imgar2
+  diferenciam dimensoes. .tab span ajusta altura de linha. :hover e
+  .is-active apresentam estados interativos; :focus-visible destaca teclado.
+  .tab-panel aplica espacamento e animacao. @keyframes appear descreve o
+  aparecimento gradual: de opacidade zero e pequeno deslocamento para estado
+  normal.
+
+LINHAS 504-557: cabecalhos dos paineis
+  .panel-heading alinha titulo e nota. .arla-title-row e .bardahl-title-row
+  alinham nome e logo. Os seletores terminados em h2 compartilham fonte e
+  peso. .arla-logo e .bardahl-logo definem tamanho/formato dos logotipos.
+  .section-kicker e h2 acertam destaque, fonte, tamanho e espacamento.
+  .panel-note estiliza a chamada auxiliar.
+
+LINHAS 558-678: cartoes de produtos e e-mail
+  .product-grid cria colunas automaticas que cabem conforme espaco disponivel
+  (auto-fit/minmax) e define intervalos. .category-panel .product-grid limita
+  largura e centraliza. .product-card organiza conteudo verticalmente.
+  .product-image cria area de imagem com altura, corte e fundo; seu img ocupa
+  a area toda com object-fit: cover e cursor de zoom. .bardahl-product-image
+  e .bardahl-product-image img ajustam fundo e imagem Bardahl para conter o
+  produto sem cortar. .product-image-arla-* fornecem fundo para imagens Arla.
+  .image-label e .product-number posicionam etiquetas sobre a imagem.
+  .product-info alinha detalhes do cartao. .category e h3 formatam categoria
+  e titulo. .product-description controla largura, cor e leitura. .email-
+  contact centraliza contato; .email-contact-label coloca o rotulo em linha
+  propria; o link pode quebrar enderecos longos.
+
+LINHAS 680-727: ampliacao de imagens (lightbox)
+  .portrait indica cursor de zoom. .image-lightbox limita dimensoes a janela,
+  aplica espaco superior para o botao e remove borda/fundo. ::backdrop escurece
+  o fundo atras do dialog. .image-lightbox img limita imagem e usa contain
+  para nao cortar. .image-lightbox-close posiciona e estiliza o botao fechar;
+  :focus-visible destaca foco por teclado.
+
+LINHAS 729-938: painel Sobre, trajetoria e estatisticas
+  .about-layout usa grid para foto e texto, limita largura e centraliza.
+  .about-panel e seletores descendentes ajustam cores especificas do perfil,
+  textos, destaques e metricas. .company-experience limita e centraliza a
+  secao de empresas. .company-instruction define o texto instrutivo.
+  .company-tabs cria grade responsiva; .company-tab estiliza cada botao,
+  logo, nome, hover, selecao via aria-selected e foco por teclado.
+  .company-description estiliza a descricao dinamica; [hidden] garante que
+  ela fique oculta antes da selecao. .portrait define corte/tamanho/sombra da
+  foto e seu hover. .about-content ajusta titulo e texto biografico. .stats
+  distribui numeros e separadores; strong e span formatam valores/rotulos.
+  .primary-button desenha o botao de contato e seu hover adiciona fundo/sombra.
+
+LINHAS 939-966: rodape e logo Arla
+  footer posiciona marca e credito nas extremidades e desenha borda superior.
+  .footer-tagline fica centralizado no rodape; .footer-credit e menor e mais
+  discreto. .corarla32 cria fundo claro com cantos arredondados para logo.
+
+LINHAS 967-1033: botao e area expansivel Bardahl
+  .more-wrap centraliza o botao. .more-btn define cores, espacamento, formato,
+  texto em maiusculas e transicoes. :hover e :focus-visible dao retorno
+  visual. .chev e a seta; aria-expanded="true" gira a seta. .bardahl-extra
+  limita largura e anima a area adicional; [hidden] a remove da exibicao.
+  .extra-title estiliza o rotulo da lista extra.
+
+LINHAS 1034-1116: abas de categorias Bardahl
+  .cat-tabs organiza botoes de categoria em grade. .cat-tab e seus strong/span
+  definem aparencia, titulo e contagem. :hover, .is-active e :focus-visible
+  definem interacao, categoria selecionada e foco acessivel. .cat-panel
+  anima cada painel; [hidden] oculta os nao selecionados. .cat-heading
+  distribui nome e quantidade.
+
+LINHAS 1117-1134: placeholder de produto
+  .ph ocupa a caixa da imagem e centraliza seu conteudo. ::before desenha uma
+  forma simples de frasco com tamanho, cor, borda arredondada e sombra
+  interna quando um produto nao tem imagem cadastrada.
+
+LINHAS 1135-1173: responsividade ate 800px
+  @media (max-width: 800px) aplica ajustes em telas menores: reduz margens
+  externas, transforma introducao em bloco, adapta espacamento, altera
+  colunas e espaco entre cartoes, reduz altura de imagens, empilha foto e
+  biografia e permite flexibilidade nas abas.
+
+LINHAS 1174-1217: responsividade ate 680px
+  Reduz intervalos dos produtos; remove padding lateral da secao de empresas;
+  transforma empresas em trilho horizontal rolavel de duas colunas, com
+  encaixe de rolagem e barra discreta. Tambem diminui imagens e textos dos
+  cartoes em telas estreitas.
+
+LINHAS 1218-1357: responsividade ate 480px
+  Compacta cabecalho, status e WhatsApp; ajusta tamanho de h1, introducao e
+  botoes de abas. Empilha cabecalho do painel e produtos em uma coluna,
+  reduz logos e espacamento das estatisticas, adapta o rodape, redimensiona
+  o lightbox para a tela inteira e reorganiza categorias/botao Ver mais.
+  100vh e a altura de viewport tradicional; 100dvh acompanha a viewport
+  dinamica de navegadores moveis. Regras duplicadas para ambos os valores
+  servem como compatibilidade.
+
+PROPRIEDADES CSS MAIS IMPORTANTES
+---------------------------------
+display: flex/grid escolhe o modelo de layout; align-items alinha no eixo
+transversal; justify-content distribui no eixo principal; gap cria espaco.
+width/height definem dimensoes; max-width/min-height limitam dimensoes.
+padding e espaco interno; margin e espaco externo. color e cor do texto;
+background e fundo; border desenha borda; border-radius arredonda cantos.
+font-size, font-weight e line-height controlam texto. object-fit ajusta
+imagens; position e top/right/bottom/left/inset posicionam elementos.
+overflow controla conteudo que excede a caixa. transition suaviza mudancas;
+transform move, escala ou gira; box-shadow cria sombra. @media adapta estilos
+conforme largura da tela.
+
+
+3. JAVASCRIPT: script.js (243 linhas)
+=====================================
+
+LINHAS 1-6: referencias ao HTML
+1      Busca o contenedor principal para trocar tema.
+2      Busca os botoes de navegacao principal.
+3      Busca os paineis que esses botoes controlam.
+4      Guarda o botao de voltar ao topo.
+5      Guarda o dialog de ampliacao de imagens.
+6      Busca a imagem dentro do dialog para reutiliza-la no zoom.
+
+LINHAS 8-12: tema inicial e botao de topo
+8      Adiciona tema Arla ao contenedor no carregamento inicial.
+10     Declara funcao que esconde o link de topo quando scrollY <= 200.
+11     Registra a funcao para ser chamada durante a rolagem; passive evita
+       bloquear a rolagem do navegador.
+12     Atualiza o estado imediatamente, sem esperar pela primeira rolagem.
+
+LINHAS 14-28: zoom de imagens
+14-18  openImage recebe uma imagem, copia src e alt para a imagem do dialog e
+       abre a janela modal.
+19-30  makeZoomable torna a imagem focavel por teclado, atribui semantica de
+       botao e rotulo acessivel, e instala interacoes de clique/teclas.
+       Enter e Espaco abrem o zoom; preventDefault evita que Espaco role a
+       pagina.
+28     Seleciona imagens dos produtos e retrato e aplica a funcao acima.
+
+LINHAS 30-50: fechar lightbox e alternar as abas principais
+30     O clique no botao X fecha o dialog de ampliacao.
+31     O clique no fundo do dialog tambem fecha a janela, mas clicar na
+       propria imagem nao a fecha.
+33-50  Percorre cada aba principal e registra clique. Descobre o painel via
+       data-tab; marca a aba clicada como ativa e atualiza aria-selected.
+       Remove os temas existentes e aplica o tema associado a aba. Percorre
+       paineis, alterna classe is-visible e propriedade hidden.
+
+LINHAS 52-67: dados de empresas e referencias
+52-62  empresas e um array de objetos. Cada objeto guarda nome, caminho do
+       logo e descricao profissional.
+63     Busca o contenedor onde serao inseridos os botoes de empresas.
+64-66  Busca painel de descricao, titulo e paragrafo que recebem texto.
+67     Cria array vazio para guardar botoes e facilitar atualizacao/acesso.
+
+LINHAS 69-105: criacao e selecao de empresas
+69-105 Percorre empresas e cria um botao para cada uma. Define tipo, classes,
+       id, atributos ARIA e foco inicial. Cria a imagem do logo e um span de
+       nome, junta os elementos e insere no contenedor. Guarda o botao no
+       array.
+90-100 Ao clicar, atualiza aria-selected e tabIndex dos botoes e escreve
+       nome e descricao da empresa no painel. O painel deixa de ficar oculto.
+102-104 Clica no primeiro botao automaticamente quando ele e criado, fazendo
+       a primeira descricao aparecer inicialmente.
+
+LINHAS 107-122: teclado na lista de empresas
+107    Escuta eventos de teclado no contenedor.
+108    Descobre qual botao tem o foco atual.
+109    Sai se o foco nao estiver em um botao da lista.
+111    Declara onde o foco vai chegar.
+112-115 Seta direita/esquerda percorrem circularmente; Home e End saltam
+       para o primeiro/ultimo botao.
+116    Ignora outras teclas.
+118    Impede comportamento padrao do navegador para as teclas tratadas.
+119-120 Move tabIndex: so a proxima aba fica na sequencia de foco.
+121    Move o foco visual para o novo botao.
+
+LINHAS 124-173: catalogo de categorias Bardahl
+124    Inicia o array de categorias extras.
+125-141 Categoria combustivel: id, nome, total de itens e lista de nomes,
+       alguns com caminho de imagem.
+142-153 Categoria motor, com quantidade e produtos.
+154-163 Categoria radiador, com quantidade e produtos.
+164-172 Categoria lubrificante de moto, com quantidade e produtos.
+173    Fecha o array.
+
+LINHAS 175-178: elementos e formatadores
+175-176 Busca os contenedores de botoes e paineis de categoria.
+177    pad transforma numero em texto com dois digitos, como 1 -> "01".
+178    label cria texto singular/plural para contagem.
+
+LINHAS 180-219: montar categorias e cartoes
+180-219 Percorre cada categoria para gerar a interface.
+181-184 Cria uma lista do tamanho definido em total. Usa os produtos
+       existentes ou monta um item generico de reserva.
+186-193 Cria o botao da categoria, aplica atributos acessiveis, titulo e
+       contagem, e o adiciona a lista.
+195-201 Cria o painel correspondente, informa seu titulo/relacao acessivel,
+       adiciona uma grade interna e busca essa grade.
+203-216 Para cada produto, cria um article; monta imagem ou placeholder,
+       numero, categoria, nome e descricao; ativa zoom se houver imagem e
+       insere o cartao na grade.
+218    Insere o painel pronto em catPanels.
+
+LINHAS 221-234: selecionar categoria
+221-228 selectCategoria atualiza classe ativa e aria-selected nos botoes,
+       depois mostra somente o painel cujo id corresponde a categoria.
+229-232 O clique no contenedor identifica o botao clicado usando closest e
+       seleciona o painel correspondente.
+233    Seleciona categoria inicial, combustivel.
+
+LINHAS 235-243: botao Ver mais
+235-236 Busca botao e area extra.
+237-243 Ao clicar, inverte o estado hidden da area; atualiza aria-expanded e
+       texto para "Ver menos" ou "Ver mais". Quando abre, rola suavemente
+       ate a area extra.
+
+SINTAXE E CONCEITOS JAVASCRIPT
+------------------------------
+const declara uma referencia que nao sera reatribuida. () => {} e uma funcao
+seta. document.querySelector busca o primeiro elemento CSS correspondente;
+querySelectorAll busca todos. addEventListener registra uma acao, como click.
+forEach percorre itens. classList altera classes. setAttribute altera
+atributos HTML. template strings usam crases e ${...} para inserir valores.
+Array.from cria arrays; length determina quantidade; ternario (condicao ? A
+: B) escolhe entre valores. && significa "e"; || fornece alternativa.
+return encerra uma funcao; event.target identifica origem do evento;
+preventDefault cancela a acao padrao do navegador.
+
+OBSERVACAO SOBRE NUMERACAO DO JAVASCRIPT
+----------------------------------------
+Os intervalos desta secao descrevem os blocos logicos. Para uma linha exata,
+consulte o numero mostrado pelo editor no arquivo script.js. Se linhas forem
+adicionadas ou removidas, a numeracao deste guia precisara ser atualizada.

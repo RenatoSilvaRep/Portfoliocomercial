@@ -12,10 +12,15 @@ As fontes DM Sans e Space Grotesk são carregadas do Google Fonts e precisam de 
 
 ```text
 .
-├── index.html   # Conteúdo, estrutura e comportamento das abas
-├── style.css    # Layout, cores, tipografia e responsividade
-├── README.md    # Esta documentação
-└── imagens/     # Logos, retrato e ícones do navegador
+├── index.html             # Estrutura e conteúdo da página
+├── style.css              # Layout, cores, tipografia e responsividade
+├── script.js              # Interações e conteúdo dinâmico
+├── README.md              # Esta documentação
+├── LEIA-ME-CODIGO.txt     # Guia explicativo do código
+└── imagens/
+    ├── produtos/          # Imagens de produtos Arla Eco 32 e Bardahl
+    ├── sobremim/          # Logos das empresas da trajetória profissional
+    └── ...                # Logos principais, retrato e ícones
 ```
 
 ### Imagens
@@ -24,6 +29,8 @@ As fontes DM Sans e Space Grotesk são carregadas do Google Fonts e precisam de 
 - `fotorenao.jpg`: retrato na apresentação profissional.
 - `Logo-Arla32-Eco.png`: logo da linha Arla Eco 32.
 - `bardahl.png`: logo da linha Bardahl.
+- `produtos/arlaeco32/` e `produtos/bardahl/`: imagens dos produtos.
+- `sobremim/`: logos das empresas exibidas na seção de trajetória.
 - Os arquivos `favicon*`, `apple-touch-icon*` e `android-chrome-*` são ícones do site.
 
 Os caminhos dessas imagens são relativos à pasta do projeto. Ao substituir um arquivo, mantenha o nome e a extensão ou atualize o caminho correspondente no HTML.
@@ -36,26 +43,34 @@ O cabeçalho contém o nome, disponibilidade e acesso ao WhatsApp. A introduçã
 - **Arla Eco 32**: produtos da linha pesada.
 - **Bardahl**: produtos para proteção do motor.
 
-Os botões usam `data-tab` para identificar o painel relacionado. Cada painel tem um `id` correspondente e começa oculto com o atributo `hidden`, exceto a seção inicial. O JavaScript no final de `index.html` atualiza o estado selecionado, alterna os painéis e aplica o tema correspondente.
+Os botões usam `data-tab` para identificar o painel relacionado. Cada painel tem um `id` correspondente e começa oculto com o atributo `hidden`, exceto a seção inicial. O arquivo externo `script.js`, carregado no final de `index.html`, atualiza o estado selecionado, alterna os painéis e aplica o tema correspondente.
 
 Para adicionar ou renomear uma aba, mantenha sincronizados o `data-tab` do botão, o `id` do painel e os atributos de acessibilidade `aria-controls` e `aria-labelledby`. Para uma aba com tema próprio, defina `data-theme` no botão e crie as regras de cores correspondentes em `style.css`.
 
 ## Conteúdo e contatos
 
-Edite textos e produtos diretamente em `index.html`. Cada produto está dentro de um elemento `.product-card`, agrupado em `.product-grid`. Os blocos visuais atuais dos produtos são criados com CSS; as imagens de produto não estão armazenadas na pasta `imagens/`.
+Edite os produtos Arla Eco 32 e os primeiros produtos Bardahl diretamente em `index.html`. Cada produto está dentro de um elemento `.product-card`, agrupado em `.product-grid`. As categorias extras Bardahl e as empresas da trajetória profissional são configuradas em `script.js`.
 
-Os links do WhatsApp aparecem no cabeçalho, na introdução e na seção de perfil. Para atualizar o contato, altere os respectivos links `wa.me` no HTML. Use o número internacional com código do país e DDD, sem espaços ou pontuação.
+Os links do WhatsApp aparecem no cabeçalho, na introdução e na seção de perfil. Para atualizar o contato, altere os respectivos links `wa.me` em `index.html`. Use o número internacional com código do país e DDD, sem espaços ou pontuação. Os endereços de e-mail também ficam no HTML.
 
 ## Estilos e responsividade
 
-As cores principais estão definidas como variáveis no início de `style.css`. As regras de layout, botões, imagens, estados de foco e temas ficam nesse arquivo. As adaptações para telas menores estão nas media queries de `800px` e `480px`.
+As cores principais estão definidas como variáveis no início de `style.css`. As regras de layout, botões, imagens, estados de foco e temas ficam nesse arquivo. As adaptações para telas menores estão nas media queries de `800px`, `680px` e `480px`.
 
 Os temas Arla e Bardahl são aplicados à página pela classe `theme-arla` ou `theme-bardahl`. As regras de cada tema ajustam cores de fundo, texto, bordas e estados dos botões.
+
+## JavaScript
+
+`script.js` implementa a navegação entre abas, a troca de temas, o botão de voltar ao topo, a ampliação das imagens, a criação das abas e descrições das empresas, as categorias extras Bardahl e o botão “Ver mais”. Os dados das empresas ficam no array `empresas`; os dados das categorias e produtos extras ficam no array `bardahlCategorias`.
+
+## Guia do código
+
+O arquivo `LEIA-ME-CODIGO.txt` explica a estrutura do HTML, os principais grupos de regras CSS e as interações do JavaScript. As referências às linhas podem mudar quando os arquivos forem editados.
 
 ## Tecnologias
 
 - HTML5 para o conteúdo e a estrutura semântica.
 - CSS3 para apresentação e layout responsivo.
-- JavaScript nativo, incluído no `index.html`, para a navegação entre abas e a troca de tema.
+- JavaScript nativo, separado em `script.js`, para interações e conteúdo dinâmico.
 
 Não há framework, gerenciador de pacotes ou suíte de testes configurada neste projeto.
