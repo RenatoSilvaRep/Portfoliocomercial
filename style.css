@@ -1177,6 +1177,30 @@ footer {
     gap: 12px;
   }
 
+  .company-experience {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .company-tabs {
+    grid-auto-columns: calc((100% - 12px) / 2);
+    grid-auto-flow: column;
+    grid-template-columns: none;
+    grid-template-rows: 1fr;
+    gap: 12px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    padding: 4px 3px 12px;
+    scroll-snap-type: x mandatory;
+    scrollbar-color: #987560 rgba(118, 81, 63, .12);
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .company-tab {
+    scroll-snap-align: start;
+  }
+
   .product-image {
     height: 180px;
     margin-bottom: 12px;
