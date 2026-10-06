@@ -268,6 +268,27 @@
 	<button class="image-lightbox-close" type="button" aria-label="Fechar imagem ampliada">&times;</button>
 	<img src="" alt="">
 </dialog>
+<dialog class="shopping-cart-dialog" aria-labelledby="shopping-cart-title">
+	<div class="shopping-cart-header">
+		<div>
+			<p class="section-kicker">SEU PEDIDO</p>
+			<h2 id="shopping-cart-title">Minha compra</h2>
+			<p class="shopping-cart-category" data-cart-category></p>
+		</div>
+		<button class="shopping-cart-close" data-cart-close type="button" aria-label="Fechar compra">&times;</button>
+	</div>
+	<div class="shopping-cart-items" data-cart-items></div>
+	<button class="shopping-cart-checkout" data-cart-checkout type="button">Concluir compra</button>
+	<button class="shopping-cart-continue" data-cart-close type="button">Continuar comprando</button>
+</dialog>
+<button class="shopping-cart-fab" data-cart-open type="button" aria-label="Ver minha compra" title="Ver minha compra" hidden>
+	<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+		<path d="M3 4h2l2.2 10.1a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 1.9-1.4L21 8H6" />
+		<circle cx="10" cy="20" r="1.4" />
+		<circle cx="18" cy="20" r="1.4" />
+	</svg>
+	<span class="shopping-cart-count" data-cart-count>0</span>
+</button>
 <a class="back-to-top" href="#top" aria-label="Voltar ao topo" title="Voltar ao topo" hidden><span aria-hidden="true">↑</span></a>
 
 <script src="script.js"></script>

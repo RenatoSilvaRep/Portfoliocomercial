@@ -20,11 +20,15 @@ const addProductOrderControls = (card) => {
 	checkbox.type = 'checkbox';
 	checkbox.className = 'product-select';
 	checkbox.setAttribute('aria-label', `Selecionar ${productName}`);
+	const selectLabel = document.createElement('label');
+	selectLabel.className = 'product-select-label';
+	selectLabel.append(checkbox, document.createTextNode('Comprar'));
 
 	const titleRow = document.createElement('div');
 	titleRow.className = 'product-title-row';
 	title.before(titleRow);
-	titleRow.append(checkbox, title);
+	titleRow.appendChild(title);
+	titleRow.after(selectLabel);
 
 	const quantityLabel = document.createElement('label');
 	quantityLabel.className = 'product-quantity';
@@ -40,12 +44,67 @@ const addProductOrderControls = (card) => {
 	quantity.required = true;
 	quantity.setAttribute('aria-label', `Quantidade de ${productName}`);
 	quantityLabel.appendChild(quantity);
-	titleRow.after(quantityLabel);
+	selectLabel.after(quantityLabel);
 };
 
 document.querySelectorAll('.product-card').forEach(addProductOrderControls);
 
 const orderPhone = '5587991021576';
+const cartButton = document.querySelector('[data-cart-open]');
+const cartDialog = document.querySelector('.shopping-cart-dialog');
+const cartItems = cartDialog.querySelector('[data-cart-items]');
+const cartCategory = cartDialog.querySelector('[data-cart-category]');
+
+const getActiveOrderPanel = () => document.querySelector('.category-panel.is-visible');
+
+const renderCart = () => {
+	const panel = getActiveOrderPanel();
+	const selected = panel
+		? Array.from(panel.querySelectorAll('.product-card')).filter((card) => card.querySelector('.product-select')?.checked)
+		: [];
+	cartItems.replaceChildren();
+	cartCategory.textContent = panel?.id === 'arla' ? 'Arla Eco 32' : 'Bardahl';
+
+	selected.forEach((card) => {
+		const name = card.querySelector('.product-info h3').textContent.trim();
+		const code = card.querySelector('.product-number')?.textContent.trim() || '';
+		const sourceQuantity = card.querySelector('.product-quantity-input');
+		const item = document.createElement('article');
+		item.className = 'shopping-cart-item';
+
+		const details = document.createElement('div');
+		details.className = 'shopping-cart-item-details';
+		const productName = document.createElement('strong');
+		productName.textContent = name;
+		const productCode = document.createElement('span');
+		productCode.textContent = `Código ${code}`;
+		details.append(productName, productCode);
+
+		const controls = document.createElement('div');
+		controls.className = 'shopping-cart-item-controls';
+		const quantityLabel = document.createElement('label');
+		quantityLabel.textContent = 'Qtd.';
+		const quantity = document.createElement('input');
+		quantity.type = 'number';
+		quantity.className = 'shopping-cart-quantity';
+		quantity.min = '1';
+		quantity.step = '1';
+		quantity.required = true;
+		quantity.value = sourceQuantity.value;
+		quantity.setAttribute('aria-label', `Quantidade de ${name}`);
+		quantityLabel.appendChild(quantity);
+
+		const remove = document.createElement('button');
+		remove.type = 'button';
+		remove.className = 'shopping-cart-remove';
+		remove.dataset.cartRemove = '';
+		remove.textContent = 'Remover';
+		remove.setAttribute('aria-label', `Remover ${name} da compra`);
+		controls.append(quantityLabel, remove);
+		item.append(details, controls);
+		cartItems.appendChild(item);
+	});
+};
 
 const updateOrderLinks = () => {
 	document.querySelectorAll('[data-order-actions]').forEach((actions) => {
@@ -72,7 +131,93 @@ const updateOrderLinks = () => {
 		const count = selected.length;
 		link.querySelector('span').textContent = `Fazer pedido pelo WhatsApp (${count} ${count === 1 ? 'produto' : 'produtos'})`;
 	});
+
+	const activePanel = getActiveOrderPanel();
+	const activeSelectionCount = activePanel
+		? activePanel.querySelectorAll('.product-select:checked').length
+		: 0;
+	cartButton.hidden = activeSelectionCount === 0;
+	cartButton.querySelector('[data-cart-count]').textContent = activeSelectionCount;
+	cartButton.setAttribute('aria-label', `Ver minha compra, ${activeSelectionCount} ${activeSelectionCount === 1 ? 'produto' : 'produtos'}`);
 };
+
+cartButton.addEventListener('click', () => {
+	renderCart();
+	cartDialog.showModal();
+});
+cartDialog.querySelector('[data-cart-checkout]').addEventListener('click', () => {
+	const panel = getActiveOrderPanel();
+	const orderLink = panel?.querySelector('[data-order-link]');
+	if (!orderLink || orderLink.getAttribute('aria-disabled') === 'true') {
+		if (panel) {
+			Array.from(panel.querySelectorAll('.product-card'))
+				.filter((card) => card.querySelector('.product-select')?.checked)
+				.map((card) => card.querySelector('.product-quantity-input'))
+				.find((quantity) => !quantity.validity.valid)
+				?.reportValidity();
+		}
+		return;
+	}
+
+	cartDialog.close();
+	window.setTimeout(() => {
+		orderLink.scrollIntoView({ behavior: 'smooth', block: 'center' });
+		orderLink.focus({ preventScroll: true });
+	}, 0);
+});
+cartDialog.querySelectorAll('[data-cart-close]').forEach((button) => {
+	button.addEventListener('click', () => cartDialog.close());
+});
+cartDialog.addEventListener('click', (event) => {
+	if (event.target === cartDialog) cartDialog.close();
+});
+cartDialog.addEventListener('input', (event) => {
+	const quantity = event.target.closest('.shopping-cart-quantity');
+	if (!quantity) return;
+	const item = quantity.closest('.shopping-cart-item');
+	const code = item.querySelector('.shopping-cart-item-details span').textContent.replace('Código ', '');
+	const panel = getActiveOrderPanel();
+	const card = Array.from(panel.querySelectorAll('.product-card'))
+		.find((product) => product.querySelector('.product-number')?.textContent.trim() === code);
+	const sourceQuantity = card?.querySelector('.product-quantity-input');
+	if (sourceQuantity) {
+		sourceQuantity.value = quantity.value;
+		updateOrderLinks();
+	}
+});
+cartDialog.addEventListener('change', (event) => {
+	const quantity = event.target.closest('.shopping-cart-quantity');
+	if (!quantity) return;
+	if (!quantity.validity.valid || !Number.isInteger(Number(quantity.value))) {
+		quantity.value = '1';
+	}
+	const item = quantity.closest('.shopping-cart-item');
+	const code = item.querySelector('.shopping-cart-item-details span').textContent.replace('Código ', '');
+	const panel = getActiveOrderPanel();
+	const card = Array.from(panel.querySelectorAll('.product-card'))
+		.find((product) => product.querySelector('.product-number')?.textContent.trim() === code);
+	const sourceQuantity = card?.querySelector('.product-quantity-input');
+	if (sourceQuantity) sourceQuantity.value = quantity.value;
+	updateOrderLinks();
+});
+cartDialog.addEventListener('click', (event) => {
+	const removeButton = event.target.closest('[data-cart-remove]');
+	if (!removeButton) return;
+	const item = removeButton.closest('.shopping-cart-item');
+	const code = item.querySelector('.shopping-cart-item-details span').textContent.replace('Código ', '');
+	const panel = getActiveOrderPanel();
+	const card = Array.from(panel.querySelectorAll('.product-card'))
+		.find((product) => product.querySelector('.product-number')?.textContent.trim() === code);
+	if (card) {
+		card.querySelector('.product-select').checked = false;
+		card.querySelector('.product-select-label').classList.remove('is-selected');
+		card.querySelector('.product-quantity').hidden = true;
+		card.querySelector('.product-quantity-input').value = '1';
+	}
+	updateOrderLinks();
+	renderCart();
+	if (cartItems.childElementCount === 0) cartDialog.close();
+});
 
 document.querySelector('main').addEventListener('click', (event) => {
 	const clearButton = event.target.closest('[data-clear-order]');
@@ -80,6 +225,7 @@ document.querySelector('main').addEventListener('click', (event) => {
 		const panel = clearButton.closest('.category-panel');
 		panel.querySelectorAll('.product-card').forEach((card) => {
 			card.querySelector('.product-select').checked = false;
+			card.querySelector('.product-select-label').classList.remove('is-selected');
 			const quantityLabel = card.querySelector('.product-quantity');
 			quantityLabel.hidden = true;
 			quantityLabel.querySelector('input').value = '1';
@@ -101,10 +247,12 @@ document.querySelector('main').addEventListener('click', (event) => {
 document.querySelector('main').addEventListener('change', (event) => {
 	const checkbox = event.target.closest('.product-select');
 	if (checkbox) {
-		const quantityLabel = checkbox.closest('.product-title-row').nextElementSibling;
+		const quantityLabel = checkbox.closest('.product-select-label').nextElementSibling;
 		quantityLabel.hidden = !checkbox.checked;
+		checkbox.closest('.product-select-label').classList.toggle('is-selected', checkbox.checked);
 		if (checkbox.checked) quantityLabel.querySelector('input').focus();
 		updateOrderLinks();
+		if (cartDialog.open) renderCart();
 		return;
 	}
 
@@ -157,6 +305,7 @@ tabs.forEach((tab) => {
 			panel.classList.toggle('is-visible', visible);
 			panel.hidden = !visible;
 		});
+		updateOrderLinks();
 	});
 });
 
