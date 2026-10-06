@@ -229,15 +229,15 @@ const bardahlCategorias = [
 		nome: 'Aditivo Combustível',
 		total: 10,
 		items: [
-			{ codigo: '0203', nome: 'CLEAN GAS', img: 'imagens/produtos/bardahl/CLEAN20GAS.png' },
-			{ codigo: '0204', nome: 'FLEX', img: 'imagens/produtos/bardahl/BARDAHL FLEX.png' },
+			{ codigo: '0203', nome: 'CLEAN GAS', img: 'imagens/produtos/bardahl/CLEAN20GAS.png', desc: 'Promove a limpeza dos bicos injetores e válvulas, reduz o encrostamento e elimina resíduos da queima. Frasco de 200 ml.' },
+			{ codigo: '0204', nome: 'FLEX', img: 'imagens/produtos/bardahl/BARDAHL FLEX.png', desc: 'Protege e limpa o sistema de injeção e ajuda a reduzir o consumo de combustível. Frasco de 200 ml.' },
 			{ codigo: '0208', nome: 'MAX TOP', img: 'imagens/produtos/bardahl/MAXTOP.png' },
 			{ codigo: '0209', nome: 'SPECIAL 6X1' },
 			{ codigo: '0210', nome: 'MAX HYBRID', img: 'imagens/produtos/bardahl/MAX20HYBRID.png' },
-			{ codigo: '0205', nome: 'PROAL', img: 'imagens/produtos/bardahl/BARDAHL PROAL.png' },
+			{ codigo: '0205', nome: 'PROAL', img: 'imagens/produtos/bardahl/BARDAHL PROAL.png', desc: 'Limpa bicos e válvulas, remove a borra branca proveniente do etanol e contém inibidores de corrosão. Frasco de 200 ml.' },
 			{ codigo: '0211', nome: 'MAX POWER MOTO' },
 			{ codigo: '0212', nome: 'MAX DIESEL', img: 'imagens/produtos/bardahl/MAX20DIESEL.png' },
-			{ codigo: '0202', nome: 'MAX S10', img: 'imagens/produtos/bardahl/BARDAHL MAX S10.png' },
+			{ codigo: '0202', nome: 'MAX S10', img: 'imagens/produtos/bardahl/BARDAHL MAX S10.png', desc: 'Ação descarbonizante, antioxidante, bactericida e fungicida. Evita a formação de borra e aumenta a vida útil do diesel. Frasco de 500 ml.' },
 			{ codigo: '0213', nome: 'MAX POWER DIESEL' }
 		]
 	},
@@ -247,7 +247,7 @@ const bardahlCategorias = [
 		total: 5,
 		items: [
 			{ codigo: '0214', nome: 'B12 PREMIUM', img: 'imagens/produtos/bardahl/B122020Premium.png' },
-			{ codigo: '0201', nome: 'B12 TURBO', img: 'imagens/produtos/bardahl/B122020TURBO.png' },
+			{ codigo: '0201', nome: 'B12 TURBO', img: 'imagens/produtos/bardahl/B122020TURBO.png', desc: 'Aumenta a vida útil do óleo e do motor e protege contra oxidação. Disponível em embalagens de 1 litro, 20 litros e 200 litros.' },
 			{ codigo: '0215', nome: 'B12', img: 'imagens/produtos/bardahl/CONDICIONADOR.png' },
 			{ codigo: '0216', nome: 'CONDICIONADOR DE METAIS', img: 'imagens/produtos/bardahl/B12.png' },
 			{ codigo: '0217', nome: 'PROLONGA', img: 'imagens/produtos/bardahl/PROLONGA.png' }
@@ -258,7 +258,7 @@ const bardahlCategorias = [
 		nome: 'Aditivo Radiador',
 		total: 3,
 		items: [
-			{ codigo: '0206', nome: 'RAD COOL CONCENTRADO', img: 'imagens/produtos/bardahl/RAD20COOL.png' },
+			{ codigo: '0206', nome: 'RAD COOL LONG LIFE CONCENTRADO', img: 'imagens/produtos/bardahl/RAD20COOL.png', desc: "Oferece proteção anticorrosiva, evita a formação de bolhas, melhora a eficiência térmica e lubrifica a bomba d'água. Frasco de 1 litro." },
 			{ codigo: '0218', nome: 'RAD COOL PRONTO USO', img: 'imagens/produtos/bardahl/RAD20COOL20PRONTO20PRA20USO201L.png' },
 			{ codigo: '0219', nome: 'FLUIDO', img: 'imagens/produtos/bardahl/FLUIDO20ROSA201L.png' }
 		]
