@@ -600,6 +600,16 @@ h2 {
   object-fit: contain;
 }
 
+.bardahl-product-image .product-number {
+  right: 12px;
+  bottom: 12px;
+  padding: 7px 9px;
+  color: #201b21;
+  background: #f4cf07;
+  font-size: 12px;
+  letter-spacing: .04em;
+}
+
 .product-image-arla-01,
 .product-image-arla-02,
 .product-image-arla-03,

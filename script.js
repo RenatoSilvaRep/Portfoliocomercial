@@ -118,16 +118,16 @@ const bardahlCategorias = [
 		nome: 'Aditivo Combustível',
 		total: 10,
 		items: [
-			{ nome: 'CLEAN GAS', img: 'imagens/produtos/bardahl/CLEAN20GAS.png' },
-			{ nome: 'FLEX', img: 'imagens/produtos/bardahl/BARDAHL FLEX.png' },
-			{ nome: 'MAX TOP', img: 'imagens/produtos/bardahl/MAXTOP.png' },
-			{ nome: 'SPECIAL 6X1' },
-			{ nome: 'MAX HYBRID', img: 'imagens/produtos/bardahl/MAX20HYBRID.png' },
-			{ nome: 'PROAL', img: 'imagens/produtos/bardahl/BARDAHL PROAL.png' },
-			{ nome: 'MAX POWER MOTO' },
-			{ nome: 'MAX DIESEL', img: 'imagens/produtos/bardahl/MAX20DIESEL.png' },
-			{ nome: 'MAX S10', img: 'imagens/produtos/bardahl/BARDAHL MAX S10.png' },
-			{ nome: 'MAX POWER DIESEL' }
+			{ codigo: '0203', nome: 'CLEAN GAS', img: 'imagens/produtos/bardahl/CLEAN20GAS.png' },
+			{ codigo: '0204', nome: 'FLEX', img: 'imagens/produtos/bardahl/BARDAHL FLEX.png' },
+			{ codigo: '0208', nome: 'MAX TOP', img: 'imagens/produtos/bardahl/MAXTOP.png' },
+			{ codigo: '0209', nome: 'SPECIAL 6X1' },
+			{ codigo: '0210', nome: 'MAX HYBRID', img: 'imagens/produtos/bardahl/MAX20HYBRID.png' },
+			{ codigo: '0205', nome: 'PROAL', img: 'imagens/produtos/bardahl/BARDAHL PROAL.png' },
+			{ codigo: '0211', nome: 'MAX POWER MOTO' },
+			{ codigo: '0212', nome: 'MAX DIESEL', img: 'imagens/produtos/bardahl/MAX20DIESEL.png' },
+			{ codigo: '0202', nome: 'MAX S10', img: 'imagens/produtos/bardahl/BARDAHL MAX S10.png' },
+			{ codigo: '0213', nome: 'MAX POWER DIESEL' }
 		]
 	},
 	{
@@ -135,11 +135,11 @@ const bardahlCategorias = [
 		nome: 'Aditivo Motor',
 		total: 5,
 		items: [
-			{ nome: 'B12 PREMIUM', img: 'imagens/produtos/bardahl/B122020Premium.png' },
-			{ nome: 'B12 TURBO', img: 'imagens/produtos/bardahl/B122020TURBO.png' },
-			{ nome: 'B12', img: 'imagens/produtos/bardahl/CONDICIONADOR.png' },
-			{ nome: 'CONDICIONADOR DE METAIS', img: 'imagens/produtos/bardahl/B12.png' },
-			{ nome: 'PROLONGA', img: 'imagens/produtos/bardahl/PROLONGA.png' }
+			{ codigo: '0214', nome: 'B12 PREMIUM', img: 'imagens/produtos/bardahl/B122020Premium.png' },
+			{ codigo: '0201', nome: 'B12 TURBO', img: 'imagens/produtos/bardahl/B122020TURBO.png' },
+			{ codigo: '0215', nome: 'B12', img: 'imagens/produtos/bardahl/CONDICIONADOR.png' },
+			{ codigo: '0216', nome: 'CONDICIONADOR DE METAIS', img: 'imagens/produtos/bardahl/B12.png' },
+			{ codigo: '0217', nome: 'PROLONGA', img: 'imagens/produtos/bardahl/PROLONGA.png' }
 		]
 	},
 	{
@@ -147,9 +147,9 @@ const bardahlCategorias = [
 		nome: 'Aditivo Radiador',
 		total: 3,
 		items: [
-			{ nome: 'RAD COOL CONCENTRADO', img: 'imagens/produtos/bardahl/RAD20COOL.png' },
-			{ nome: 'RAD COOL PRONTO USO', img: 'imagens/produtos/bardahl/RAD20COOL20PRONTO20PRA20USO201L.png' },
-			{ nome: 'FLUIDO', img: 'imagens/produtos/bardahl/FLUIDO20ROSA201L.png' }
+			{ codigo: '0206', nome: 'RAD COOL CONCENTRADO', img: 'imagens/produtos/bardahl/RAD20COOL.png' },
+			{ codigo: '0218', nome: 'RAD COOL PRONTO USO', img: 'imagens/produtos/bardahl/RAD20COOL20PRONTO20PRA20USO201L.png' },
+			{ codigo: '0219', nome: 'FLUIDO', img: 'imagens/produtos/bardahl/FLUIDO20ROSA201L.png' }
 		]
 	},
 	{
@@ -157,8 +157,8 @@ const bardahlCategorias = [
 		nome: 'Lubrificante Moto',
 		total: 2,
 		items: [
-			{ nome: 'MAXTEC 20W50', img: 'imagens/produtos/bardahl/MAXTEC20PERFORMANCE20MOTO2020W50.png' },
-			{ nome: 'MAXTEC 10W30', img: 'imagens/produtos/bardahl/MAXTEC20PERFORMANCE20MOTO2010W30.png' }
+			{ codigo: '0220', nome: 'MAXTEC 20W50', img: 'imagens/produtos/bardahl/MAXTEC20PERFORMANCE20MOTO2020W50.png' },
+			{ codigo: '0221', nome: 'MAXTEC 10W30', img: 'imagens/produtos/bardahl/MAXTEC20PERFORMANCE20MOTO2010W30.png' }
 		]
 	}
 ];
@@ -166,6 +166,7 @@ const bardahlCategorias = [
 const catTabs = document.getElementById('catTabs');
 const catPanels = document.getElementById('catPanels');
 const pad = (n) => String(n).padStart(2, '0');
+let bardahlProductIndex = 22;
 const label = (n) => `${n} ${n === 1 ? 'item' : 'itens'}`;
 
 bardahlCategorias.forEach((cat) => {
@@ -191,13 +192,14 @@ bardahlCategorias.forEach((cat) => {
 	panel.innerHTML = `<div class="cat-heading"><h3>${cat.nome}</h3><span>${label(cat.total)}</span></div><div class="product-grid"></div>`;
 	const grid = panel.querySelector('.product-grid');
 
-	lista.forEach((p, i) => {
+	lista.forEach((p) => {
 		const card = document.createElement('article');
 		card.className = 'product-card';
+		const productNumber = p.codigo || `02${pad(bardahlProductIndex++)}`;
 		card.innerHTML = `
 			<div class="product-image bardahl-product-image" style="background-color:rgb(173,166,31);">
 				${p.img ? `<img src="${p.img}" alt="${p.nome}">` : '<div class="ph" aria-hidden="true"></div>'}
-				<span class="product-number">${pad(i + 1)}</span>
+				<span class="product-number">${productNumber}</span>
 			</div>
 			<div class="product-info"><div><p class="category">Bardahl</p><h3>${p.nome}</h3>
 			<p class="product-description">${p.desc || ''}</p></div></div>`;
