@@ -7,6 +7,113 @@ const lightboxImage = imageLightbox.querySelector('img');
 
 pageShell.classList.add('theme-arla');
 
+const addProductOrderControls = (card) => {
+	const title = card.querySelector('.product-info h3');
+	if (!title || card.querySelector('.product-title-row')) return;
+
+	const productName = title.textContent.trim();
+	const checkbox = document.createElement('input');
+	checkbox.type = 'checkbox';
+	checkbox.className = 'product-select';
+	checkbox.setAttribute('aria-label', `Selecionar ${productName}`);
+
+	const titleRow = document.createElement('div');
+	titleRow.className = 'product-title-row';
+	title.before(titleRow);
+	titleRow.append(checkbox, title);
+
+	const quantityLabel = document.createElement('label');
+	quantityLabel.className = 'product-quantity';
+	quantityLabel.hidden = true;
+	quantityLabel.append(document.createTextNode('Quantidade '));
+
+	const quantity = document.createElement('input');
+	quantity.type = 'number';
+	quantity.className = 'product-quantity-input';
+	quantity.min = '1';
+	quantity.step = '1';
+	quantity.value = '1';
+	quantity.required = true;
+	quantity.setAttribute('aria-label', `Quantidade de ${productName}`);
+	quantityLabel.appendChild(quantity);
+	titleRow.after(quantityLabel);
+};
+
+document.querySelectorAll('.product-card').forEach(addProductOrderControls);
+
+const orderPhone = '5587991021576';
+
+const updateOrderLinks = () => {
+	document.querySelectorAll('[data-order-actions]').forEach((actions) => {
+		const panel = actions.closest('.category-panel');
+		const selected = Array.from(panel.querySelectorAll('.product-card'))
+			.filter((card) => card.querySelector('.product-select')?.checked);
+		const items = selected.map((card) => ({
+			code: card.querySelector('.product-number')?.textContent.trim(),
+			quantity: card.querySelector('.product-quantity-input')
+		}));
+		const valid = items.every(({ code, quantity }) => (
+			code && quantity.validity.valid && Number.isInteger(Number(quantity.value))
+		));
+		const message = [
+			'Oi, tudo bem! Gostaria de fazer o seguinte pedido:',
+			...items.map(({ code, quantity }, index) => `${index + 1}. ${code} quantidade ${quantity.value}`)
+		].join('\n');
+
+		actions.hidden = selected.length === 0;
+		const link = actions.querySelector('[data-order-link]');
+		link.href = `https://wa.me/${orderPhone}?text=${encodeURIComponent(message)}`;
+		link.setAttribute('aria-disabled', String(!valid));
+		link.classList.toggle('is-disabled', !valid);
+		const count = selected.length;
+		link.querySelector('span').textContent = `Fazer pedido pelo WhatsApp (${count} ${count === 1 ? 'produto' : 'produtos'})`;
+	});
+};
+
+document.querySelector('main').addEventListener('click', (event) => {
+	const clearButton = event.target.closest('[data-clear-order]');
+	if (clearButton) {
+		const panel = clearButton.closest('.category-panel');
+		panel.querySelectorAll('.product-card').forEach((card) => {
+			card.querySelector('.product-select').checked = false;
+			const quantityLabel = card.querySelector('.product-quantity');
+			quantityLabel.hidden = true;
+			quantityLabel.querySelector('input').value = '1';
+		});
+		updateOrderLinks();
+		return;
+	}
+
+	const link = event.target.closest('[data-order-link]');
+	if (!link || link.getAttribute('aria-disabled') !== 'true') return;
+	event.preventDefault();
+	Array.from(link.closest('.category-panel').querySelectorAll('.product-card'))
+		.filter((card) => card.querySelector('.product-select')?.checked)
+		.map((card) => card.querySelector('.product-quantity-input'))
+		.find((quantity) => !quantity.validity.valid)
+		?.reportValidity();
+});
+
+document.querySelector('main').addEventListener('change', (event) => {
+	const checkbox = event.target.closest('.product-select');
+	if (checkbox) {
+		const quantityLabel = checkbox.closest('.product-title-row').nextElementSibling;
+		quantityLabel.hidden = !checkbox.checked;
+		if (checkbox.checked) quantityLabel.querySelector('input').focus();
+		updateOrderLinks();
+		return;
+	}
+
+	if (event.target.matches('.product-quantity-input')) {
+		if (!event.target.validity.valid) event.target.value = '1';
+		updateOrderLinks();
+	}
+});
+
+document.querySelector('main').addEventListener('input', (event) => {
+	if (event.target.matches('.product-quantity-input')) updateOrderLinks();
+});
+
 const updateBackToTopVisibility = () => { backToTop.hidden = window.scrollY <= 200; };
 window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
 updateBackToTopVisibility();
@@ -203,6 +310,7 @@ bardahlCategorias.forEach((cat) => {
 			</div>
 			<div class="product-info"><div><p class="category">Bardahl</p><h3>${p.nome}</h3>
 			<p class="product-description">${p.desc || ''}</p></div></div>`;
+		addProductOrderControls(card);
 		const img = card.querySelector('img');
 		if (img) makeZoomable(img);
 		grid.appendChild(card);
