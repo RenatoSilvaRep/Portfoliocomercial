@@ -7,6 +7,10 @@ const lightboxImage = imageLightbox.querySelector('img');
 
 pageShell.classList.add('theme-arla');
 
+document.querySelector('.brand').addEventListener('click', () => {
+	document.getElementById('tab-sobre').click();
+});
+
 const addProductOrderControls = (card) => {
 	const title = card.querySelector('.product-info h3');
 	if (!title || card.querySelector('.product-title-row')) return;
