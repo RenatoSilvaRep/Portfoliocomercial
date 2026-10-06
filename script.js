@@ -56,69 +56,60 @@ const empresas = [
 	{ nome: 'Chiaperini', logo: 'imagens/sobremim/chiaperini.png', descricao: 'Promotor técnico de vendas atuando em Pernambuco, Ceará e Maranhão, com foco em soluções e atendimento técnico.' },
 	{ nome: 'Hydronlubz', logo: 'imagens/sobremim/hydronlubz.png', descricao: 'Técnico vendedor externo no Nordeste, com presença em 9 estados, palestras e treinamentos para clientes e equipes.' },
 	{ nome: 'Shell', logo: 'imagens/sobremim/sheel.png', descricao: 'Representante comercial em Pernambuco, com atuação voltada para relacionamento e resultados comerciais.' },
-	{ nome: 'Gulf', logo: 'imagens/sobremim/gulf.png', descricao: 'Representante comercial em Pernambuco, com foco em atendimento ao cliente e expansão de carteira.' },
+	{ nome: 'Rep. Renato Silva', logo: 'imagens/logo renato.png', descricao: 'Representante comercial em Pernambuco, com foco em atendimento ao cliente e expansão de carteira.' },
 	{ nome: 'Gasoleo', logo: 'imagens/sobremim/gasoleo.png', descricao: 'Vendedor interno e de campo em Pernambuco, com atenção ao atendimento comercial e à rede de clientes.' },
 	{ nome: 'Flach', logo: 'imagens/sobremim/flach.png', descricao: 'Supervisor regional no Norte e Nordeste, com liderança de equipe, treinamento e acompanhamento comercial.' }
 ];
 const companyTabs = document.getElementById('companyTabs');
-const companyDescription = document.getElementById('companyDescription');
-const companyDescriptionTitle = document.getElementById('companyDescriptionTitle');
-const companyDescriptionText = document.getElementById('companyDescriptionText');
-const companyTabButtons = [];
 
 empresas.forEach((empresa, index) => {
+	const card = document.createElement('article');
+	card.className = 'company-card';
+	card.setAttribute('role', 'listitem');
+
 	const button = document.createElement('button');
 	button.type = 'button';
 	button.className = 'company-tab';
 	button.id = `company-tab-${index}`;
-	button.setAttribute('role', 'tab');
-	button.setAttribute('aria-controls', companyDescription.id);
-	button.setAttribute('aria-selected', 'false');
-	button.tabIndex = index === 0 ? 0 : -1;
-	button.setAttribute('aria-label', empresa.nome);
+	button.setAttribute('aria-controls', `company-description-${index}`);
+	button.setAttribute('aria-expanded', 'false');
 
 	const logo = document.createElement('img');
 	logo.src = empresa.logo;
 	logo.alt = '';
 	logo.setAttribute('aria-hidden', 'true');
 	const name = document.createElement('span');
+	name.className = 'company-name';
 	name.textContent = empresa.nome;
-	button.append(logo, name);
-	companyTabs.appendChild(button);
-	companyTabButtons.push(button);
+	const indicator = document.createElement('span');
+	indicator.className = 'company-indicator';
+	indicator.setAttribute('aria-hidden', 'true');
+	indicator.textContent = '+';
+	button.append(logo, name, indicator);
 
 	button.addEventListener('click', () => {
-		companyTabButtons.forEach((tab) => {
-			const selected = tab === button;
-			tab.setAttribute('aria-selected', selected);
-			tab.tabIndex = selected ? 0 : -1;
+		const abrir = button.getAttribute('aria-expanded') !== 'true';
+		companyTabs.querySelectorAll('.company-tab').forEach((otherButton) => {
+			const expanded = otherButton === button && abrir;
+			otherButton.setAttribute('aria-expanded', String(expanded));
+			otherButton.closest('.company-card').classList.toggle('is-expanded', expanded);
+			document.getElementById(otherButton.getAttribute('aria-controls')).hidden = !expanded;
 		});
-		companyDescription.setAttribute('aria-labelledby', button.id);
-		companyDescriptionTitle.textContent = empresa.nome;
-		companyDescriptionText.textContent = empresa.descricao;
-		companyDescription.hidden = false;
 	});
 
-	if (index === 0) {
-		button.click();
-	}
-});
+	const description = document.createElement('div');
+	description.className = 'company-description';
+	description.id = `company-description-${index}`;
+	description.setAttribute('role', 'region');
+	description.setAttribute('aria-labelledby', button.id);
+	description.setAttribute('aria-live', 'polite');
+	description.hidden = true;
+	const descriptionText = document.createElement('p');
+	descriptionText.textContent = empresa.descricao;
+	description.appendChild(descriptionText);
 
-companyTabs.addEventListener('keydown', (event) => {
-	const currentIndex = companyTabButtons.indexOf(document.activeElement);
-	if (currentIndex < 0) return;
-
-	let nextIndex;
-	if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % companyTabButtons.length;
-	else if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + companyTabButtons.length) % companyTabButtons.length;
-	else if (event.key === 'Home') nextIndex = 0;
-	else if (event.key === 'End') nextIndex = companyTabButtons.length - 1;
-	else return;
-
-	event.preventDefault();
-	companyTabButtons[currentIndex].tabIndex = -1;
-	companyTabButtons[nextIndex].tabIndex = 0;
-	companyTabButtons[nextIndex].focus();
+	card.append(button, description);
+	companyTabs.appendChild(card);
 });
 
 const bardahlCategorias = [

@@ -13,7 +13,7 @@ somente para organizar e separar visualmente o codigo. Em HTML, CSS e
 JavaScript, chaves e tags de fechamento encerram blocos iniciados antes.
 
 
-1. HTML: index.html (265 linhas)
+1. HTML: index.html (261 linhas)
 ===============================
 
 1      <!DOCTYPE html>
@@ -50,7 +50,7 @@ JavaScript, chaves e tags de fechamento encerram blocos iniciados antes.
        Contem a pagina inteira; a classe tambem recebe temas visuais por
        meio do JavaScript.
 
-20-30  Cabecalho (header.topbar)
+20-29  Cabecalho (header.topbar)
        A linha 20 cria o cabecalho e o id="top" serve como destino do link
        "voltar ao topo". O link da marca leva a secao Sobre; spans separam o
        monograma "R" e o nome. A area header-actions reune disponibilidade
@@ -59,7 +59,7 @@ JavaScript, chaves e tags de fechamento encerram blocos iniciados antes.
        acessibilidade; a imagem WhatsApp tem alt vazio pois o texto do link
        ja informa sua finalidade.
 
-32     <main>
+31     <main>
        Marca o conteudo principal da pagina.
 32-39  Introducao (section.intro)
        A secao associa seu titulo acessivel pelo atributo aria-labelledby.
@@ -76,27 +76,26 @@ JavaScript, chaves e tags de fechamento encerram blocos iniciados antes.
        imagens dos botoes tem alt vazio por serem decorativas junto ao texto.
        botcol e apenas um contenedor para organizar a terceira aba.
 
-58-79  Painel Sobre
+58-74  Painel Sobre
        section#sobre e o painel controlado pela aba Sobre; hidden esconde o
        painel inicialmente. about-layout organiza foto e biografia. A foto
        inclui texto alternativo. about-content traz titulo, apresentacao,
        metricas e botao de contato. A secao company-experience apresenta a
-       trajetoria profissional. companyTabs e companyDescription sao
-       contenedores vazios: script.js cria botoes de empresas e preenche
-       sua descricao. aria-live="polite" pede que leitores de tela anunciem
-       a descricao atual sem interromper.
+       trajetoria profissional. companyTabs e o contenedor vertical da lista
+       de cartoes das empresas; script.js cria cada cartao e o resumo que se
+       expande dentro dele ao clicar.
 
-81-163  Painel Arla Eco 32
+77-159  Painel Arla Eco 32
        section#arla e o painel de produtos inicialmente visivel. O cabecalho
        identifica o produto, mostra o logo e uma chamada comercial. product-
        grid contem varios article.product-card, um por produto. Cada cartao
        inclui imagem, numero, categoria, nome e descricao; image-label marca
        o mais procurado. Classes product-image-arla-* permitem estilos
-       especificos. A sequencia de cartoes compartilha a mesma estrutura e
-       muda principalmente imagem, rotulo e texto. O bloco email-contact
-       fornece um link mailto para abrir o programa de e-mail.
+       especificos. Os oito cartoes mostram codigos 0101 a 0108 e as
+       descricoes comerciais informadas para cada produto. O bloco
+       email-contact fornece um link mailto para abrir o programa de e-mail.
 
-165-251  Painel Bardahl
+161-247  Painel Bardahl
        section#bardahl comeca escondida e e mostrada quando sua aba e
        selecionada. panel-heading traz chamada e logo. product-grid repete
        a estrutura de cartao, agora com imagens e nomes Bardahl. O atributo
@@ -107,23 +106,23 @@ JavaScript, chaves e tags de fechamento encerram blocos iniciados antes.
        com abas de categorias e listas de produtos. O e-mail final e outro
        link mailto.
 
-252-255  Rodape
+249-251  Rodape
        footer encerra o conteudo da pagina; os spans mostram nome comercial,
        frase de marca e credito.
 
-257-260  Janela de imagem ampliada
+253-256  Janela de imagem ampliada
        dialog e uma janela modal nativa do navegador. O botao fecha a janela
        e &times; e o simbolo de fechar. O img vazio recebe endereco e texto
        alternativo pelo script quando uma foto e clicada.
 
-261     <a class="back-to-top"...>
+257     <a class="back-to-top"...>
        Link fixo para o id="top". hidden o deixa oculto ate o script detectar
        que a pagina foi rolada. A seta tem aria-hidden pois o proprio link
        ja possui aria-label.
-263     <script src="script.js"></script>
+259     <script src="script.js"></script>
        Carrega o JavaScript externo no fim do body, quando os elementos HTML
        usados pelo script ja foram criados.
-265     </body> / </html>
+261     </body> / </html>
        Fecham o corpo e o documento.
 
 NOTAS DE ATRIBUTOS HTML
@@ -137,7 +136,7 @@ article representa um item independente, section agrupa conteudo tematico,
 nav e a navegacao, main e o conteudo principal, e footer e o rodape.
 
 
-2. CSS: style.css (1357 linhas)
+2. CSS: style.css (1382 linhas)
 ===============================
 
 COMO LER AS REGRAS
@@ -256,56 +255,56 @@ LINHAS 680-727: ampliacao de imagens (lightbox)
   para nao cortar. .image-lightbox-close posiciona e estiliza o botao fechar;
   :focus-visible destaca foco por teclado.
 
-LINHAS 729-938: painel Sobre, trajetoria e estatisticas
+LINHAS 729-967: painel Sobre, trajetoria e estatisticas
   .about-layout usa grid para foto e texto, limita largura e centraliza.
   .about-panel e seletores descendentes ajustam cores especificas do perfil,
   textos, destaques e metricas. .company-experience limita e centraliza a
   secao de empresas. .company-instruction define o texto instrutivo.
-  .company-tabs cria grade responsiva; .company-tab estiliza cada botao,
-  logo, nome, hover, selecao via aria-selected e foco por teclado.
-  .company-description estiliza a descricao dinamica; [hidden] garante que
-  ela fique oculta antes da selecao. .portrait define corte/tamanho/sombra da
-  foto e seu hover. .about-content ajusta titulo e texto biografico. .stats
-  distribui numeros e separadores; strong e span formatam valores/rotulos.
+  .company-list cria uma coluna vertical de cartoes. .company-card envolve
+  botao e resumo; .company-tab organiza logo, nome e indicador. O estado
+  expandido recebe estilo proprio; .company-description fica dentro do
+  cartao e [hidden] a esconde ate o clique. #arla .product-number realca os
+  codigos de produto. .portrait define corte/tamanho/sombra da foto e seu
+  hover. .about-content ajusta titulo e texto biografico. .stats distribui
+  numeros e separadores; strong e span formatam valores/rotulos.
   .primary-button desenha o botao de contato e seu hover adiciona fundo/sombra.
 
-LINHAS 939-966: rodape e logo Arla
+LINHAS 969-995: rodape e logo Arla
   footer posiciona marca e credito nas extremidades e desenha borda superior.
   .footer-tagline fica centralizado no rodape; .footer-credit e menor e mais
   discreto. .corarla32 cria fundo claro com cantos arredondados para logo.
 
-LINHAS 967-1033: botao e area expansivel Bardahl
+LINHAS 997-1062: botao e area expansivel Bardahl
   .more-wrap centraliza o botao. .more-btn define cores, espacamento, formato,
   texto em maiusculas e transicoes. :hover e :focus-visible dao retorno
   visual. .chev e a seta; aria-expanded="true" gira a seta. .bardahl-extra
   limita largura e anima a area adicional; [hidden] a remove da exibicao.
   .extra-title estiliza o rotulo da lista extra.
 
-LINHAS 1034-1116: abas de categorias Bardahl
+LINHAS 1064-1145: abas de categorias Bardahl
   .cat-tabs organiza botoes de categoria em grade. .cat-tab e seus strong/span
   definem aparencia, titulo e contagem. :hover, .is-active e :focus-visible
   definem interacao, categoria selecionada e foco acessivel. .cat-panel
   anima cada painel; [hidden] oculta os nao selecionados. .cat-heading
   distribui nome e quantidade.
 
-LINHAS 1117-1134: placeholder de produto
+LINHAS 1147-1163: placeholder de produto
   .ph ocupa a caixa da imagem e centraliza seu conteudo. ::before desenha uma
   forma simples de frasco com tamanho, cor, borda arredondada e sombra
   interna quando um produto nao tem imagem cadastrada.
 
-LINHAS 1135-1173: responsividade ate 800px
+LINHAS 1165-1202: responsividade ate 800px
   @media (max-width: 800px) aplica ajustes em telas menores: reduz margens
   externas, transforma introducao em bloco, adapta espacamento, altera
   colunas e espaco entre cartoes, reduz altura de imagens, empilha foto e
   biografia e permite flexibilidade nas abas.
 
-LINHAS 1174-1217: responsividade ate 680px
-  Reduz intervalos dos produtos; remove padding lateral da secao de empresas;
-  transforma empresas em trilho horizontal rolavel de duas colunas, com
-  encaixe de rolagem e barra discreta. Tambem diminui imagens e textos dos
-  cartoes em telas estreitas.
+LINHAS 1204-1241: responsividade ate 680px
+  Reduz intervalos dos produtos e remove padding lateral da secao de empresas.
+  Os cartoes de empresas permanecem empilhados verticalmente; logos, botoes
+  e recuos dos resumos diminuem para caber melhor em telas estreitas.
 
-LINHAS 1218-1357: responsividade ate 480px
+LINHAS 1243-1382: responsividade ate 480px
   Compacta cabecalho, status e WhatsApp; ajusta tamanho de h1, introducao e
   botoes de abas. Empilha cabecalho do painel e produtos em uma coluna,
   reduz logos e espacamento das estatisticas, adapta o rodape, redimensiona
@@ -328,7 +327,7 @@ transform move, escala ou gira; box-shadow cria sombra. @media adapta estilos
 conforme largura da tela.
 
 
-3. JAVASCRIPT: script.js (243 linhas)
+3. JAVASCRIPT: script.js (234 linhas)
 =====================================
 
 LINHAS 1-6: referencias ao HTML
@@ -349,7 +348,7 @@ LINHAS 8-12: tema inicial e botao de topo
 LINHAS 14-28: zoom de imagens
 14-18  openImage recebe uma imagem, copia src e alt para a imagem do dialog e
        abre a janela modal.
-19-30  makeZoomable torna a imagem focavel por teclado, atribui semantica de
+19-27  makeZoomable torna a imagem focavel por teclado, atribui semantica de
        botao e rotulo acessivel, e instala interacoes de clique/teclas.
        Enter e Espaco abrem o zoom; preventDefault evita que Espaco role a
        pagina.
@@ -364,72 +363,62 @@ LINHAS 30-50: fechar lightbox e alternar as abas principais
        Remove os temas existentes e aplica o tema associado a aba. Percorre
        paineis, alterna classe is-visible e propriedade hidden.
 
-LINHAS 52-67: dados de empresas e referencias
+LINHAS 52-63: dados de empresas e referencias
 52-62  empresas e um array de objetos. Cada objeto guarda nome, caminho do
        logo e descricao profissional.
 63     Busca o contenedor onde serao inseridos os botoes de empresas.
-64-66  Busca painel de descricao, titulo e paragrafo que recebem texto.
-67     Cria array vazio para guardar botoes e facilitar atualizacao/acesso.
 
-LINHAS 69-105: criacao e selecao de empresas
-69-105 Percorre empresas e cria um botao para cada uma. Define tipo, classes,
-       id, atributos ARIA e foco inicial. Cria a imagem do logo e um span de
-       nome, junta os elementos e insere no contenedor. Guarda o botao no
-       array.
-90-100 Ao clicar, atualiza aria-selected e tabIndex dos botoes e escreve
-       nome e descricao da empresa no painel. O painel deixa de ficar oculto.
-102-104 Clica no primeiro botao automaticamente quando ele e criado, fazendo
-       a primeira descricao aparecer inicialmente.
+LINHAS 65-113: criacao e expansao de cartoes de empresas
+65-68  Percorre os dados, cria um article para cada empresa e marca-o como
+       item da lista acessivel.
+70-88  Cria o botao expansivel, associa-o ao resumo com aria-controls,
+       comeca fechado com aria-expanded="false", monta logo, nome e indicador
+       mais, e os coloca no botao.
+90-98  No clique, abre ou recolhe o cartao selecionado e fecha os outros.
+       Atualiza aria-expanded, a classe visual e hidden do resumo.
+100-109 Cria a regiao de resumo dentro do cartao, associa-a ao botao para
+        acessibilidade e preenche o texto profissional.
+111-112 Junta botao e resumo no cartao e adiciona o cartao a lista. Os botoes
+        mantem a navegacao de teclado nativa: Tab percorre os botoes e
+        Enter/Espaco expandem ou recolhem o cartao focado.
 
-LINHAS 107-122: teclado na lista de empresas
-107    Escuta eventos de teclado no contenedor.
-108    Descobre qual botao tem o foco atual.
-109    Sai se o foco nao estiver em um botao da lista.
-111    Declara onde o foco vai chegar.
-112-115 Seta direita/esquerda percorrem circularmente; Home e End saltam
-       para o primeiro/ultimo botao.
-116    Ignora outras teclas.
-118    Impede comportamento padrao do navegador para as teclas tratadas.
-119-120 Move tabIndex: so a proxima aba fica na sequencia de foco.
-121    Move o foco visual para o novo botao.
-
-LINHAS 124-173: catalogo de categorias Bardahl
-124    Inicia o array de categorias extras.
-125-141 Categoria combustivel: id, nome, total de itens e lista de nomes,
+LINHAS 115-164: catalogo de categorias Bardahl
+115    Inicia o array de categorias extras.
+116-132 Categoria combustivel: id, nome, total de itens e lista de nomes,
        alguns com caminho de imagem.
-142-153 Categoria motor, com quantidade e produtos.
-154-163 Categoria radiador, com quantidade e produtos.
-164-172 Categoria lubrificante de moto, com quantidade e produtos.
-173    Fecha o array.
+133-144 Categoria motor, com quantidade e produtos.
+145-154 Categoria radiador, com quantidade e produtos.
+155-163 Categoria lubrificante de moto, com quantidade e produtos.
+164    Fecha o array.
 
-LINHAS 175-178: elementos e formatadores
-175-176 Busca os contenedores de botoes e paineis de categoria.
-177    pad transforma numero em texto com dois digitos, como 1 -> "01".
-178    label cria texto singular/plural para contagem.
+LINHAS 166-169: elementos e formatadores
+166-167 Busca os contenedores de botoes e paineis de categoria.
+168    pad transforma numero em texto com dois digitos, como 1 -> "01".
+169    label cria texto singular/plural para contagem.
 
-LINHAS 180-219: montar categorias e cartoes
-180-219 Percorre cada categoria para gerar a interface.
-181-184 Cria uma lista do tamanho definido em total. Usa os produtos
+LINHAS 171-210: montar categorias e cartoes
+171-210 Percorre cada categoria para gerar a interface.
+172-175 Cria uma lista do tamanho definido em total. Usa os produtos
        existentes ou monta um item generico de reserva.
-186-193 Cria o botao da categoria, aplica atributos acessiveis, titulo e
+177-184 Cria o botao da categoria, aplica atributos acessiveis, titulo e
        contagem, e o adiciona a lista.
-195-201 Cria o painel correspondente, informa seu titulo/relacao acessivel,
+186-192 Cria o painel correspondente, informa seu titulo/relacao acessivel,
        adiciona uma grade interna e busca essa grade.
-203-216 Para cada produto, cria um article; monta imagem ou placeholder,
+194-207 Para cada produto, cria um article; monta imagem ou placeholder,
        numero, categoria, nome e descricao; ativa zoom se houver imagem e
        insere o cartao na grade.
-218    Insere o painel pronto em catPanels.
+209    Insere o painel pronto em catPanels.
 
-LINHAS 221-234: selecionar categoria
-221-228 selectCategoria atualiza classe ativa e aria-selected nos botoes,
+LINHAS 212-224: selecionar categoria
+212-219 selectCategoria atualiza classe ativa e aria-selected nos botoes,
        depois mostra somente o painel cujo id corresponde a categoria.
-229-232 O clique no contenedor identifica o botao clicado usando closest e
+220-223 O clique no contenedor identifica o botao clicado usando closest e
        seleciona o painel correspondente.
-233    Seleciona categoria inicial, combustivel.
+224    Seleciona categoria inicial, combustivel.
 
-LINHAS 235-243: botao Ver mais
-235-236 Busca botao e area extra.
-237-243 Ao clicar, inverte o estado hidden da area; atualiza aria-expanded e
+LINHAS 226-234: botao Ver mais
+226-227 Busca botao e area extra.
+228-234 Ao clicar, inverte o estado hidden da area; atualiza aria-expanded e
        texto para "Ver menos" ou "Ver mais". Quando abre, rola suavemente
        ate a area extra.
 

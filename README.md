@@ -39,8 +39,8 @@ Os caminhos dessas imagens são relativos à pasta do projeto. Ao substituir um 
 
 O cabeçalho contém o nome, disponibilidade e acesso ao WhatsApp. A introdução apresenta o portfólio e um link de contato. A navegação por abas mostra uma seção por vez:
 
-- **Sobre mim**: apresentação, experiência, clientes atendidos e contato.
-- **Arla Eco 32**: produtos da linha pesada.
+- **Sobre mim**: apresentação, experiência, clientes atendidos, contato e lista vertical de empresas com resumos expansíveis.
+- **Arla Eco 32**: produtos da linha pesada, com códigos e descrições comerciais.
 - **Bardahl**: produtos para proteção do motor.
 
 Os botões usam `data-tab` para identificar o painel relacionado. Cada painel tem um `id` correspondente e começa oculto com o atributo `hidden`, exceto a seção inicial. O arquivo externo `script.js`, carregado no final de `index.html`, atualiza o estado selecionado, alterna os painéis e aplica o tema correspondente.
@@ -61,7 +61,7 @@ Os temas Arla e Bardahl são aplicados à página pela classe `theme-arla` ou `t
 
 ## JavaScript
 
-`script.js` implementa a navegação entre abas, a troca de temas, o botão de voltar ao topo, a ampliação das imagens, a criação das abas e descrições das empresas, as categorias extras Bardahl e o botão “Ver mais”. Os dados das empresas ficam no array `empresas`; os dados das categorias e produtos extras ficam no array `bardahlCategorias`.
+`script.js` implementa a navegação entre abas, a troca de temas, o botão de voltar ao topo, a ampliação das imagens, a criação dos cartões expansíveis das empresas, as categorias extras Bardahl e o botão “Ver mais”. Os dados das empresas ficam no array `empresas`; os dados das categorias e produtos extras ficam no array `bardahlCategorias`.
 
 ## Guia do código
 
