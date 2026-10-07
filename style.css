@@ -975,6 +975,50 @@ h2 {
   height: 19px;
 }
 
+.maintenance-contact {
+  display: flex;
+  justify-content: center;
+  margin: 18px auto 0;
+}
+
+.maintenance-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 18px;
+  color: #fff;
+  background: #178c4c;
+  font-size: 14px;
+  font-weight: 700;
+  transition: background-color .2s ease, transform .2s ease;
+}
+
+.maintenance-button:hover {
+  background: #116d3a;
+  transform: translateY(-2px);
+}
+
+.maintenance-button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.maintenance-button .whatsapp-icon {
+  width: 19px;
+  height: 19px;
+}
+
+.maintenance-icon {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
 .category {
   margin-bottom: 7px;
   font-size: 11px;
