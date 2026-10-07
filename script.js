@@ -376,18 +376,17 @@ const bardahlCategorias = [
 	{
 		id: 'combustivel',
 		nome: 'Aditivo Combustível',
-		total: 10,
+		total: 9,
 		items: [
 			{ codigo: '0203', nome: 'CLEAN GAS', img: 'imagens/produtos/bardahl/CLEAN20GAS.png', desc: 'Promove a limpeza dos bicos injetores e válvulas, reduz o encrostamento e elimina resíduos da queima. Frasco de 200 ml.' },
 			{ codigo: '0204', nome: 'FLEX', img: 'imagens/produtos/bardahl/BARDAHL FLEX.png', desc: 'Protege e limpa o sistema de injeção e ajuda a reduzir o consumo de combustível. Frasco de 200 ml.' },
 			{ codigo: '0208', nome: 'MAX TOP', img: 'imagens/produtos/bardahl/MAXTOP.png' },
-			{ codigo: '0209', nome: 'SPECIAL 6X1' },
+			{ codigo: '0209', nome: 'FUEL SPECIAL CLEANER 6X1', img:'imagens/produtos/bardahl/FUEL SPECIAL CLEANER 6 X 1.png' },
 			{ codigo: '0210', nome: 'MAX HYBRID', img: 'imagens/produtos/bardahl/MAX20HYBRID.png' },
 			{ codigo: '0205', nome: 'PROAL', img: 'imagens/produtos/bardahl/BARDAHL PROAL.png', desc: 'Limpa bicos e válvulas, remove a borra branca proveniente do etanol e contém inibidores de corrosão. Frasco de 200 ml.' },
-			{ codigo: '0211', nome: 'MAX POWER MOTO' },
-			{ codigo: '0212', nome: 'MAX DIESEL', img: 'imagens/produtos/bardahl/MAX20DIESEL.png' },
+			{ codigo: '0211', nome: 'MAX DIESEL', img: 'imagens/produtos/bardahl/MAX20DIESEL.png' },
 			{ codigo: '0202', nome: 'MAX S10', img: 'imagens/produtos/bardahl/BARDAHL MAX S10.png', desc: 'Ação descarbonizante, antioxidante, bactericida e fungicida. Evita a formação de borra e aumenta a vida útil do diesel. Frasco de 500 ml.' },
-			{ codigo: '0213', nome: 'MAX POWER DIESEL' }
+			{ codigo: '0212', nome: 'MAX POWER DIESEL' }
 		]
 	},
 	{
