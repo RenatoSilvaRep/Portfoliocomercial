@@ -316,9 +316,10 @@ const empresas = [
 	{ nome: 'Chiaperini', logo: 'imagens/sobremim/chiaperini.png', descricao: 'Promotor técnico de vendas atuando em Pernambuco, Ceará e Maranhão, com foco em soluções e atendimento técnico.' },
 	{ nome: 'Hydronlubz', logo: 'imagens/sobremim/hydronlubz.png', descricao: 'Técnico vendedor externo no Nordeste, com presença em 9 estados, palestras e treinamentos para clientes e equipes.' },
 	{ nome: 'Shell', logo: 'imagens/sobremim/sheel.png', descricao: 'Representante comercial em Pernambuco, com atuação voltada para relacionamento e resultados comerciais.' },
-	{ nome: 'Rep. Renato Silva', logo: 'imagens/logo renato.png', descricao: 'Representante comercial em Pernambuco, com foco em atendimento ao cliente e expansão de carteira.' },
 	{ nome: 'Gasoleo', logo: 'imagens/sobremim/gasoleo.png', descricao: 'Vendedor interno e de campo em Pernambuco, com atenção ao atendimento comercial e à rede de clientes.' },
-	{ nome: 'Flach', logo: 'imagens/sobremim/flach.png', descricao: 'Supervisor regional no Norte e Nordeste, com liderança de equipe, treinamento e acompanhamento comercial.' }
+	{ nome: 'Flach', logo: 'imagens/sobremim/flach.png', descricao: 'Supervisor regional no Norte e Nordeste, com liderança de equipe, treinamento e acompanhamento comercial.' },
+	{ nome: 'Representação Renato Silva', logo: 'imagens/logo renato.png', descricao: 'Representante comercial em Pernambuco, com foco em atendimento ao cliente e expansão de carteira.' }
+	
 ];
 const companyTabs = document.getElementById('companyTabs');
 
