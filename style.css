@@ -6,6 +6,10 @@
   --cream: #dfcec0;
   --accent: #d2f36b;
   --dark-green: #203b30;
+  --action-bg: #16803c;
+  --action-bg-hover: #116d3a;
+  --action-text: #fff;
+  --action-focus: #d2f36b;
 }
 
 * {
@@ -140,16 +144,28 @@ a {
 }
 
 .page-shell.theme-arla {
+  --action-bg: #16803c;
+  --action-bg-hover: #116d32;
+  --action-text: #fff;
+  --action-focus: #b7ff87;
   background: #192f06;
   color: #f5f7f0;
 }
 
 .page-shell.theme-bardahl {
+  --action-bg: #f4cf07;
+  --action-bg-hover: #ffdc32;
+  --action-text: #201b21;
+  --action-focus: #201b21;
   background: #f4cf07;
   color: #201b21;
 }
 
 .page-shell.theme-about {
+  --action-bg: #9b4d32;
+  --action-bg-hover: #7d3c28;
+  --action-text: #fff;
+  --action-focus: #30251f;
   background: #e6d0c1cc;
   color: #30251f;
 }
@@ -1330,20 +1346,87 @@ h3 {
   display: inline-flex;
   align-items: center;
   gap: 20px;
-  padding: 15px 20px;
-  color: var(--paper);
-  background: var(--dark-green);
-  font-size: 14px;
+  min-height: 54px;
+  padding: 14px 22px;
+  color: var(--action-text);
+  background: var(--action-bg);
+  border: 1px solid transparent;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, .14);
+  font-size: 16px;
   font-weight: 700;
   transition:
-    transform .4s cubic-bezier(.2, .8, .2, 1),
-    background-color .3s ease,
-    box-shadow .3s ease;
+    transform .25s cubic-bezier(.2, .8, .2, 1),
+    background-color .25s ease,
+    box-shadow .25s ease;
+  animation: liquid-button-breathe 5s ease-in-out infinite;
 }
 
-.primary-button:hover {
-  background: #2e4d3f;
-  box-shadow: 0 10px 22px rgba(32, 59, 48, .2);
+.order-whatsapp-button,
+.maintenance-button {
+  min-height: 54px;
+  padding: 14px 22px;
+  color: var(--action-text);
+  background: var(--action-bg);
+  border: 1px solid transparent;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, .14);
+  font-size: 16px;
+  transition:
+    transform .25s cubic-bezier(.2, .8, .2, 1),
+    background-color .25s ease,
+    box-shadow .25s ease;
+  animation: liquid-button-breathe 5s ease-in-out infinite;
+}
+
+.primary-button:hover,
+.order-whatsapp-button:hover,
+.maintenance-button:hover {
+  color: var(--action-text);
+  background: var(--action-bg-hover);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, .2);
+  transform: translateY(-2px) scale(1.015);
+}
+
+.primary-button:active,
+.order-whatsapp-button:active,
+.maintenance-button:active {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .16);
+  transform: translateY(1px) scale(.985);
+}
+
+.primary-button:focus-visible,
+.order-whatsapp-button:focus-visible,
+.maintenance-button:focus-visible {
+  outline: 3px solid var(--action-focus);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 2px var(--action-text), 0 4px 10px rgba(0, 0, 0, .14);
+}
+
+.order-whatsapp-button.is-disabled {
+  animation: none;
+}
+
+@keyframes liquid-button-breathe {
+  0%,
+  100% {
+    border-radius: 16px 18px 16px 18px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, .14);
+  }
+
+  50% {
+    border-radius: 18px 16px 19px 15px;
+    box-shadow: 0 6px 13px rgba(0, 0, 0, .17);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primary-button,
+  .order-whatsapp-button,
+  .maintenance-button {
+    animation: none;
+    transition: none;
+  }
 }
 
 /* ===== Footer ===== */

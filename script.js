@@ -381,14 +381,14 @@ const bardahlCategorias = [
 		items: [
 			{ codigo: '0203', nome: 'CLEAN GAS', img: 'imagens/produtos/bardahl/CLEAN20GAS.png', desc: 'Promove a limpeza dos bicos injetores e válvulas, reduz o encrostamento e elimina resíduos da queima. Frasco de 200 ml.' },
 			{ codigo: '0204', nome: 'FLEX', img: 'imagens/produtos/bardahl/BARDAHL FLEX.png', desc: 'Protege e limpa o sistema de injeção e ajuda a reduzir o consumo de combustível. Frasco de 200 ml.' },
-			{ codigo: '0208', nome: 'MAX TOP', img: 'imagens/produtos/bardahl/MAXTOP.png' },
-			{ codigo: '0209', nome: 'FUEL SPECIAL CLEANER 6X1', img:'imagens/produtos/bardahl/FUEL SPECIAL CLEANER 6 X 1.png' },
-			{ codigo: '0210', nome: 'MAX HYBRID', img: 'imagens/produtos/bardahl/MAX20HYBRID.png' },
+			{ codigo: '0208', nome: 'MAX TOP', img: 'imagens/produtos/bardahl/MAXTOP.png', desc: 'Produto desevolvido para limpeza, lubrificação e desempenho. Frasco com 200 ml.' },
+			{ codigo: '0209', nome: 'FUEL SPECIAL CLEANER 6X1', img:'imagens/produtos/bardahl/FUEL SPECIAL CLEANER 6 X 1.png', desc:'Aditivo concentrado com ação detergente e descarbonizante, remoção de borra auxílio na partida proteção contra corrosão, redução de poluentes e atrito. Frasco com 500ml.' },
+			{ codigo: '0210', nome: 'MAX HYBRID', img: 'imagens/produtos/bardahl/MAX20HYBRID.png', desc:'Proteção contra oxidação e envelhecimento do combustivel, desenvolvido para tecnologia de veículos híbridos. Frasco com 200ml.' },
 			{ codigo: '0205', nome: 'PROAL', img: 'imagens/produtos/bardahl/BARDAHL PROAL.png', desc: 'Limpa bicos e válvulas, remove a borra branca proveniente do etanol e contém inibidores de corrosão. Frasco de 200 ml.' },
-			{ codigo: '0211', nome: 'MAX DIESEL', img: 'imagens/produtos/bardahl/MAX20DIESEL.png' },
+			{ codigo: '0211', nome: 'MAX DIESEL', img: 'imagens/produtos/bardahl/MAX20DIESEL.png', desc:'Produto para limpeza e proteção, ação demulsificate, limpeza de injeção. Frasco com 200ml.' },
 			{ codigo: '0202', nome: 'MAX S10', img: 'imagens/produtos/bardahl/BARDAHL MAX S10.png', desc: 'Ação descarbonizante, antioxidante, bactericida e fungicida. Evita a formação de borra e aumenta a vida útil do diesel. Frasco de 500 ml.' },
-			{ codigo: '0212', nome: 'POWER DIESEL', img:'imagens/produtos/bardahl/POWER20DIESEL.png' },
-			{ codigo: '0213', nome: 'POWER DIESEL', img:'imagens/produtos/bardahl/MAX20POWER.png' }
+			{ codigo: '0212', nome: 'POWER DIESEL', img:'imagens/produtos/bardahl/POWER20DIESEL.png', desc:'Melhoria da ignição e da eficiêcia, recuperação de potencia e auxilio na partida a frio. Frasco com 500ml. ' },
+			{ codigo: '0213', nome: 'MAX POWER', img:'imagens/produtos/bardahl/MAX20POWER.png', desc:'Melhora a octanagem, limpeza e lubrificação do sistema do veículo. Frasco com 200ml.' }
 		]
 	},
 	{
@@ -396,11 +396,11 @@ const bardahlCategorias = [
 		nome: 'Aditivo Motor',
 		total: 5,
 		items: [
-			{ codigo: '0214', nome: 'B12 PREMIUM', img: 'imagens/produtos/bardahl/B122020Premium.png' },
+			{ codigo: '0214', nome: 'B12 PREMIUM', img: 'imagens/produtos/bardahl/B122020Premium.png', desc:'Proteção contra desgaste, corrosão e lubrificação. Frasco com 500ml.' },
 			{ codigo: '0201', nome: 'B12 TURBO', img: 'imagens/produtos/bardahl/B122020TURBO.png', desc: 'Aumenta a vida útil do óleo e do motor e protege contra oxidação. Disponível em embalagens de 1 litro, 20 litros e 200 litros.' },
-			{ codigo: '0215', nome: 'B12', img: 'imagens/produtos/bardahl/CONDICIONADOR.png' },
-			{ codigo: '0216', nome: 'CONDICIONADOR DE METAIS', img: 'imagens/produtos/bardahl/B12.png' },
-			{ codigo: '0217', nome: 'PROLONGA', img: 'imagens/produtos/bardahl/PROLONGA.png' }
+			{ codigo: '0215', nome: 'B12', img: 'imagens/produtos/bardahl/B12.png', desc:'Redução no desgaste de peças internas, ajuda na partida a frio. Frasco de 500ml.' },
+			{ codigo: '0216', nome: 'CONDICIONADOR DE METAIS', img: 'imagens/produtos/bardahl/CONDICIONADOR.png', desc:'Cria película protetora proteção contra corrosão e oxidação. Frascp com 200ml.' },
+			{ codigo: '0217', nome: 'PROLONGA', img: 'imagens/produtos/bardahl/PROLONGA.png', desc:'Aumenta a viscosidade do óleo e auxilia na vedação interna do motor. Frasco de 500ml.'}
 		]
 	},
 	{
@@ -409,8 +409,8 @@ const bardahlCategorias = [
 		total: 3,
 		items: [
 			{ codigo: '0206', nome: 'RAD COOL LONG LIFE CONCENTRADO', img: 'imagens/produtos/bardahl/RAD20COOL.png', desc: "Oferece proteção anticorrosiva, evita a formação de bolhas, melhora a eficiência térmica e lubrifica a bomba d'água. Frasco de 1 litro." },
-			{ codigo: '0218', nome: 'RAD COOL PRONTO USO', img: 'imagens/produtos/bardahl/RAD20COOL20PRONTO20PRA20USO201L.png' },
-			{ codigo: '0219', nome: 'FLUIDO', img: 'imagens/produtos/bardahl/FLUIDO20ROSA201L.png' }
+			{ codigo: '0218', nome: 'RAD COOL PRONTO USO', img: 'imagens/produtos/bardahl/RAD20COOL20PRONTO20PRA20USO201L.png', desc:'Evita o superaquecimento e o congelamento e pode ser inserido no radiador sem a necessidade de diluição. Frasco de 1L'},
+			{ codigo: '0219', nome: 'FLUIDO', img: 'imagens/produtos/bardahl/FLUIDO20ROSA201L.png', desc:'Ação contra corrosão e partes internas do motor.'}
 		]
 	},
 	{
@@ -418,8 +418,8 @@ const bardahlCategorias = [
 		nome: 'Lubrificante Moto',
 		total: 2,
 		items: [
-			{ codigo: '0220', nome: 'MAXTEC 20W50', img: 'imagens/produtos/bardahl/MAXTEC20PERFORMANCE20MOTO2020W50.png' },
-			{ codigo: '0221', nome: 'MAXTEC 10W30', img: 'imagens/produtos/bardahl/MAXTEC20PERFORMANCE20MOTO2010W30.png' }
+			{ codigo: '0220', nome: 'MAXTEC 20W50', img: 'imagens/produtos/bardahl/MAXTEC20PERFORMANCE20MOTO2020W50.png', desc:'Lubrificante mineral, controle de borra, partida a frio, proteção contra desgaste e corrosão. Fraco com 1L' },
+			{ codigo: '0221', nome: 'MAXTEC 10W30', img: 'imagens/produtos/bardahl/MAXTEC20PERFORMANCE20MOTO2010W30.png', desc:'Lubrificate semissintetico, controle de borra, partida a frio, proteção contra desgaste e corrosão. Fraco com 1L' }
 		]
 	}
 ];
@@ -428,7 +428,7 @@ const bardahlCategorias = [
 // Catálogo PN Stellantis conforme lista fornecida, sem preços.
 bardahlCategorias.push({
   id: 'pn-stellantis',
-  nome: 'Lista PN Stellantis',
+  nome: 'Stellantis',
   total: 21,
 
   items: [
