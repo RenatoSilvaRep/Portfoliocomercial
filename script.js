@@ -424,6 +424,143 @@ const bardahlCategorias = [
 	}
 ];
 
+
+// Catálogo PN Stellantis conforme lista fornecida, sem preços.
+bardahlCategorias.push({
+  id: 'pn-stellantis',
+  nome: 'Lista PN Stellantis',
+  total: 21,
+
+  items: [
+    {
+      codigo: '',
+      nome: 'BARDAHL RAD COOL LONG LIFE 35% PRONTO USO ROSA',
+      desc: '',
+      img: 'imagens/produtos/bardahl/.png'
+    },
+    {
+      codigo: '',
+      nome: 'BARDAHL RAD COOL LONG LIFE 50% PRONTO USO ROSA',
+      desc: '',
+      img: 'imagens/produtos/bardahl/'
+    },
+    {
+      codigo: 'imagens/produtos/bardahl/.png',
+      nome: 'BARDAHL RAD COOL LONG LIFE CONCENTRADO ROSA',
+      desc: '',
+      img: 'imagens/produtos/bardahl/'
+    },
+    {
+      codigo: '',
+      nome: 'BARDAHL RAD COOL PLUS 35% PRONTO PARA USO - VERDE',
+      desc: '',
+      img: 'imagens/produtos/bardahl/.png'
+    },
+    {
+      codigo: '',
+      nome: 'BARDAHL RAD COOL PLUS CONCENTRADO - VERDE',
+      desc: '',
+      img: 'imagens/produtos/bardahl/.png'
+    },
+    {
+      codigo: '',
+      nome: 'BARDAHL RAD COOL READY TO USE 50% PRONTO USO - VERDE',
+      desc: '',
+      img: 'imagens/produtos/bardahl/.png'
+    },
+    {
+      codigo: '',
+      nome: 'BARDAHL RADFLUSH',
+      desc: '',
+      img: 'imagens/produtos/bardahl/.png'
+    },
+    {
+      codigo: '',
+      nome: 'CLEAN PLUS',
+      desc: '',
+      img: 'imagens/produtos/bardahl/.png'
+    },
+    {
+      codigo: '',
+      nome: 'DESINGRIPANTE LPP',
+      desc: '',
+      img: 'imagens/produtos/bardahl/.png'
+    },
+    {
+      codigo: '',
+      nome: 'KIT REVISÃO',
+      desc: '',
+      img: 'imagens/produtos/bardahl/.png'
+    },
+    {
+      codigo: '',
+      nome: 'LIMPA TBI',
+      desc: '',
+      img: 'imagens/produtos/bardahl/.png'
+    },
+    {
+      codigo: '',
+      nome: 'LIMPA TUDO',
+      desc: '',
+      img: 'imagens/produtos/bardahl/.png'
+    },
+    {
+      codigo: '',
+      nome: 'PROMAX AIR CLEANER',
+      desc: '',
+      img: 'imagens/produtos/bardahl/.png'
+    },
+    {
+      codigo: '',
+      nome: 'PROMAX FLUIDO PARA RADIADORES - PARA DILUIÇÃO ROSA',
+      desc: '',
+      img: 'imagens/produtos/bardahl/.png'
+    },
+    {
+      codigo: '',
+      nome: 'PROMAX FLUIDO PARA RADIADORES PLUS - PARA DILUIÇÃO VERDE',
+      desc: '',
+      img: 'imagens/produtos/bardahl/.png'
+    },
+    {
+      codigo: '',
+      nome: 'DESCARBONIZANTE DIESEL',
+      desc: '',
+      img: 'imagens/produtos/bardahl/.png'
+    },
+    {
+      codigo: '',
+      nome: 'DESCARBONIZANTE FLEX',
+      desc: '',
+      img: 'imagens/produtos/bardahl/.png'
+    },
+    {
+      codigo: '',
+      nome: 'FUEL SPECIAL CLEANER 6x1',
+      desc: '',
+      img: 'imagens/produtos/bardahl/'
+    },
+    {
+      codigo: '',
+      nome: 'MAX HYBRID',
+      desc: '',
+      img: 'imagens/produtos/bardahl/.png'
+    },
+    {
+      codigo: '',
+      nome: 'MAX S10',
+      desc: '',
+      img: 'imagens/produtos/bardahl/.png'
+    },
+    {
+      codigo: '',
+      nome: 'MKT ADITIVO FAP EOLYS POWER FLEX KIT 1 L',
+      desc: '',
+      img: 'imagens/produtos/bardahl/.png'
+    }
+  ]
+});
+
 const catTabs = document.getElementById('catTabs');
 const catPanels = document.getElementById('catPanels');
 const pad = (n) => String(n).padStart(2, '0');
@@ -456,14 +593,15 @@ bardahlCategorias.forEach((cat) => {
 	lista.forEach((p) => {
 		const card = document.createElement('article');
 		card.className = 'product-card';
-		const productNumber = p.codigo || `02${pad(bardahlProductIndex++)}`;
+		const isPNStellantis = cat.id === 'pn-stellantis';
+		const productNumber = isPNStellantis ? '' : (p.codigo || `02${pad(bardahlProductIndex++)}`);
 		card.innerHTML = `
 			<div class="product-image bardahl-product-image" style="background-color:rgb(173,166,31);">
-				${p.img ? `<img src="${p.img}" alt="${p.nome}">` : '<div class="ph" aria-hidden="true"></div>'}
-				<span class="product-number">${productNumber}</span>
+				${p.img ? `<img src="${p.img}" alt="${p.nome}">` : '<div class="pn-photo-placeholder" role="img" aria-label="Foto do produto ainda não disponível"><strong>BARDAHL</strong><span>Foto em atualização</span></div>'}
+				${isPNStellantis ? '' : `<span class="product-number">${productNumber}</span>`}
 			</div>
 			<div class="product-info"><div><p class="category">Bardahl</p><h3>${p.nome}</h3>
-			<p class="product-description">${p.desc || ''}</p></div></div>`;
+			${isPNStellantis ? '' : `<p class="product-description">${p.desc || ''}</p>`}</div></div>`;
 		addProductOrderControls(card);
 		const img = card.querySelector('img');
 		if (img) makeZoomable(img);

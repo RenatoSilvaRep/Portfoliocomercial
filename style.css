@@ -1760,3 +1760,8 @@ footer {
     justify-content: center;
   }
 }
+/* Lista PN Stellantis: fotos existentes e indicação para fotos não fornecidas */
+.pn-photo-placeholder { position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:20px;background:linear-gradient(145deg,#f8df34,#fff3a5);color:#202020; }
+.pn-photo-placeholder strong {font-size:clamp(24px,3vw,34px);font-weight:900;letter-spacing:-.05em;}
+.pn-photo-placeholder span {font-size:13px;font-weight:600;}
+#cat-pn-stellantis .product-number {font-size:10px;max-width:calc(100% - 24px);overflow-wrap:anywhere;}
