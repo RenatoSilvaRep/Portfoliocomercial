@@ -513,12 +513,13 @@ bardahlCategorias.push({
       codigo: '',
       nome: 'BARDAHL RAD COOL PLUS 35% PRONTO PARA USO - VERDE',
       desc: '',
-      img: 'imagens/produtos/bardahl/RAD20COOL20PRONTO20PRA20USO201L.png'
+      
     },
     {
       codigo: '',
       nome: 'BARDAHL RAD COOL PLUS CONCENTRADO - VERDE',
-      desc: ''
+      desc: '',
+	  img: 'imagens/produtos/bardahl/RAD20COOL20PRONTO20PRA20USO201L.png'
     },
     {
       codigo: '',
@@ -528,12 +529,14 @@ bardahlCategorias.push({
     {
       codigo: '',
       nome: 'BARDAHL RADFLUSH',
-      desc: ''
+      desc: '',
+      img: 'imagens/produtos/bardahl/RAD20FLUSH.png'
     },
     {
       codigo: '',
       nome: 'CLEAN PLUS',
-      desc: ''
+      desc: '',
+      img: 'imagens/produtos/bardahl/CLEAN20PLUS.png'
     },
     {
       codigo: '',
@@ -553,12 +556,14 @@ bardahlCategorias.push({
     {
       codigo: '',
       nome: 'LIMPA TUDO',
-      desc: ''
+      desc: '',
+      img: 'imagens/produtos/bardahl/LIMPA20TUDO.png'
     },
     {
       codigo: '',
       nome: 'PROMAX AIR CLEANER',
-      desc: ''
+      desc: '',
+      img: 'imagens/produtos/bardahl/BARDAHL_AIR-CLEANER-500ml.png'
     },
     {
       codigo: '',
@@ -647,7 +652,7 @@ bardahlCategorias.forEach((cat) => {
 			</div>
 			<div class="product-info"><div><p class="category">Bardahl</p><h3>${p.nome}</h3>
 			${isPNStellantis ? '' : `<p class="product-description">${p.desc || ''}</p>`}</div></div>`;
-		addProductOrderControls(card);
+		if (!isPNStellantis) addProductOrderControls(card);
 		const img = card.querySelector('img');
 		if (img) makeZoomable(img);
 		grid.appendChild(card);
