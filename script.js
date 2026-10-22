@@ -297,7 +297,7 @@ tabs.forEach((tab) => {
 			item.classList.toggle('is-active', active);
 			item.setAttribute('aria-selected', active);
 		});
-		pageShell.classList.remove('theme-arla', 'theme-bardahl', 'theme-about');
+		pageShell.classList.remove('theme-arla', 'theme-bardahl', 'theme-triplo-x', 'theme-about');
 		if (tab.dataset.theme) pageShell.classList.add(`theme-${tab.dataset.theme}`);
 		else if (target === 'sobre') pageShell.classList.add('theme-about');
 		panels.forEach((panel) => {

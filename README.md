@@ -1,6 +1,6 @@
 # Portfólio comercial
 
-Site estático de apresentação profissional e catálogo de produtos de Renato Silva. A página reúne informações de contato, perfil profissional e abas para as linhas Arla Eco 32 e Bardahl.
+Site estático de apresentação profissional e catálogo de produtos de Renato Silva. A página reúne informações de contato, perfil profissional e abas para as linhas Arla Eco 32, Bardahl e Triplo X.
 
 ## Como abrir
 
@@ -42,6 +42,7 @@ O cabeçalho contém o nome, disponibilidade e acesso ao WhatsApp. A introduçã
 - **Sobre mim**: apresentação, experiência, clientes atendidos, contato e lista vertical de empresas com resumos expansíveis.
 - **Arla Eco 32**: produtos da linha pesada, com códigos e descrições comerciais.
 - **Bardahl**: produtos para proteção do motor.
+- **Triplo X**: catálogo demonstrativo fictício, identificado como conceitual e sem opção de compra.
 
 Os botões usam `data-tab` para identificar o painel relacionado. Cada painel tem um `id` correspondente e começa oculto com o atributo `hidden`, exceto a seção inicial. O arquivo externo `script.js`, carregado no final de `index.html`, atualiza o estado selecionado, alterna os painéis e aplica o tema correspondente.
 
@@ -57,7 +58,7 @@ Os links do WhatsApp aparecem no cabeçalho, na introdução e na seção de per
 
 As cores principais estão definidas como variáveis no início de `style.css`. As regras de layout, botões, imagens, estados de foco e temas ficam nesse arquivo. As adaptações para telas menores estão nas media queries de `800px`, `680px` e `480px`.
 
-Os temas Arla e Bardahl são aplicados à página pela classe `theme-arla` ou `theme-bardahl`. As regras de cada tema ajustam cores de fundo, texto, bordas e estados dos botões.
+Os temas Arla, Bardahl e Triplo X são aplicados à página pela classe correspondente (`theme-arla`, `theme-bardahl` ou `theme-triplo-x`). As regras de cada tema ajustam cores de fundo, texto, bordas e estados dos botões. A seção Triplo X usa conteúdo fictício, com aviso explícito para não ser confundido com um catálogo oficial ou disponível para venda.
 
 ## JavaScript
 

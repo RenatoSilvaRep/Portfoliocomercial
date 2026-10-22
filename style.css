@@ -161,6 +161,15 @@ a {
   color: #201b21;
 }
 
+.page-shell.theme-triplo-x {
+  --action-bg: #b69a46;
+  --action-bg-hover: #967a2e;
+  --action-text: #201b21;
+  --action-focus: #201b21;
+  background: #171613;
+  color: #f5f1e6;
+}
+
 .page-shell.theme-about {
   --action-bg: #9b4d32;
   --action-bg-hover: #7d3c28;
@@ -319,6 +328,63 @@ a {
 
 .page-shell.theme-arla .whatsapp-link {
   color: #09e01d;
+}
+
+/* Tema: Triplo X */
+.page-shell.theme-triplo-x .topbar,
+.page-shell.theme-triplo-x .tabs,
+.page-shell.theme-triplo-x footer {
+  border-color: #655a39;
+}
+
+.page-shell.theme-triplo-x .availability,
+.page-shell.theme-triplo-x .intro-copy,
+.page-shell.theme-triplo-x .panel-note,
+.page-shell.theme-triplo-x .triplo-x-product-info > p:last-child {
+  color: #c0bba9;
+}
+
+.page-shell.theme-triplo-x .eyebrow,
+.page-shell.theme-triplo-x .section-kicker,
+.page-shell.theme-triplo-x .category {
+  color: #c4a950;
+}
+
+.page-shell.theme-triplo-x h1 em,
+.page-shell.theme-triplo-x h2 em {
+  color: #c4a950;
+}
+
+.page-shell.theme-triplo-x .tab {
+  color: #c0bba9;
+}
+
+.page-shell.theme-triplo-x .tab.is-active {
+  color: #f5f1e6;
+  background: rgba(196, 169, 80, .14);
+  border-color: #c4a950;
+}
+
+.page-shell.theme-triplo-x .tab:hover {
+  color: #f5f1e6;
+  background: rgba(196, 169, 80, .2);
+}
+
+.page-shell.theme-triplo-x .tab:focus-visible {
+  outline-color: #c4a950;
+}
+
+.page-shell.theme-triplo-x .contact-link,
+.page-shell.theme-triplo-x .whatsapp-link {
+  color: #f5f1e6;
+}
+
+.page-shell.theme-triplo-x .contact-link {
+  border-color: #c4a950;
+}
+
+.page-shell.theme-triplo-x .status-dot {
+  background: #c4a950;
 }
 
 /* ===== Topbar ===== */
@@ -539,6 +605,12 @@ h2 em {
   width: 180px;
 }
 
+.tab .triplo-x-tab-logo {
+  width: 180px;
+  padding: 8px;
+  background: #171613;
+}
+
 .tab span {
   line-height: 1.2;
 }
@@ -613,6 +685,126 @@ h2 em {
   width: 72px;
   height: auto;
   border-radius: 50px;
+}
+
+.triplo-x-title-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.triplo-x-title-row h2 {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  letter-spacing: -.05em;
+}
+
+.triplo-x-logo {
+  display: block;
+  width: 120px;
+  height: 64px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.fiction-notice {
+  max-width: 780px;
+  margin: 0 0 30px;
+  padding: 18px 20px;
+  color: #f5f1e6;
+  background: rgba(196, 169, 80, .12);
+  border: 1px solid rgba(196, 169, 80, .55);
+  border-left: 4px solid #c4a950;
+  border-radius: 8px;
+}
+
+.fiction-notice strong {
+  display: block;
+  margin-bottom: 6px;
+  color: #e3c765;
+}
+
+.fiction-notice p {
+  margin: 0;
+  color: #d0cbbd;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.triplo-x-product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.triplo-x-product-card {
+  min-width: 0;
+  overflow: hidden;
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(196, 169, 80, .3);
+  border-radius: 10px;
+}
+
+.triplo-x-product-art {
+  position: relative;
+  display: grid;
+  min-height: 250px;
+  place-items: center;
+  overflow: hidden;
+  color: #d9c274;
+  background: radial-gradient(circle at 50% 40%, #45402f 0, #26241e 48%, #171613 100%);
+}
+
+.triplo-x-product-art::before,
+.triplo-x-product-art::after {
+  position: absolute;
+  width: 190px;
+  height: 190px;
+  border: 1px solid rgba(196, 169, 80, .26);
+  border-radius: 50%;
+  content: "";
+}
+
+.triplo-x-product-art::after {
+  width: 140px;
+  height: 140px;
+}
+
+.triplo-x-product-art span {
+  z-index: 1;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 56px;
+  font-weight: 700;
+  letter-spacing: -.12em;
+}
+
+.triplo-x-product-art strong {
+  position: absolute;
+  right: 14px;
+  bottom: 12px;
+  color: #c4a950;
+  font-size: 12px;
+  letter-spacing: .12em;
+}
+
+.triplo-x-product-info {
+  padding: 20px;
+}
+
+.triplo-x-product-info .category {
+  margin-bottom: 8px;
+}
+
+.triplo-x-product-info h3 {
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.triplo-x-product-info > p:last-child {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
 }
 
 .section-kicker {
@@ -1750,6 +1942,15 @@ footer {
 
   .tab .imgar1 {
     height: 70px;
+  }
+
+  .tab .triplo-x-tab-logo {
+    width: 100%;
+    height: 64px;
+  }
+
+  .triplo-x-product-grid {
+    grid-template-columns: 1fr;
   }
 
   .panel-heading {
