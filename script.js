@@ -1,6 +1,8 @@
 const pageShell = document.querySelector('.page-shell');
 const tabs = document.querySelectorAll('.tab');
 const panels = document.querySelectorAll('.tab-panel');
+const previousTabButton = document.querySelector('[data-tab-previous]');
+const nextTabButton = document.querySelector('[data-tab-next]');
 const backToTop = document.querySelector('.back-to-top');
 const imageLightbox = document.querySelector('.image-lightbox');
 const lightboxImage = imageLightbox.querySelector('img');
@@ -292,6 +294,9 @@ imageLightbox.addEventListener('click', (event) => { if (event.target === imageL
 tabs.forEach((tab) => {
 	tab.addEventListener('click', () => {
 		const target = tab.dataset.tab;
+		const previousIndex = Array.from(tabs).findIndex((item) => item.classList.contains('is-active'));
+		const activeIndex = Array.from(tabs).indexOf(tab);
+		const movingForward = activeIndex > previousIndex;
 		tabs.forEach((item) => {
 			const active = item === tab;
 			item.classList.toggle('is-active', active);
@@ -303,11 +308,68 @@ tabs.forEach((tab) => {
 		panels.forEach((panel) => {
 			const visible = panel.id === target;
 			panel.classList.toggle('is-visible', visible);
+			panel.classList.remove('is-entering-forward', 'is-entering-backward');
+			if (visible && previousIndex !== activeIndex) {
+				panel.classList.add(movingForward ? 'is-entering-forward' : 'is-entering-backward');
+			}
 			panel.hidden = !visible;
 		});
+		previousTabButton.disabled = activeIndex === 0;
+		nextTabButton.disabled = activeIndex === tabs.length - 1;
 		updateOrderLinks();
 	});
 });
+
+previousTabButton.addEventListener('click', () => {
+	const activeIndex = Array.from(tabs).findIndex((tab) => tab.classList.contains('is-active'));
+	if (activeIndex > 0) tabs[activeIndex - 1].click();
+});
+
+nextTabButton.addEventListener('click', () => {
+	const activeIndex = Array.from(tabs).findIndex((tab) => tab.classList.contains('is-active'));
+	if (activeIndex < tabs.length - 1) tabs[activeIndex + 1].click();
+});
+previousTabButton.disabled = true;
+nextTabButton.disabled = tabs.length <= 1;
+
+const mainContent = document.querySelector('main');
+let touchStart = null;
+mainContent.addEventListener('touchstart', (event) => {
+	if (event.touches.length !== 1) {
+		touchStart = null;
+		return;
+	}
+
+	const target = event.target;
+	if (target instanceof Element && target.closest('a, button, input, textarea, select, .product-image')) {
+		touchStart = null;
+		return;
+	}
+
+	const touch = event.touches[0];
+	touchStart = { x: touch.clientX, y: touch.clientY };
+}, { passive: true });
+
+mainContent.addEventListener('touchend', (event) => {
+	if (!touchStart || event.changedTouches.length !== 1) return;
+
+	const touch = event.changedTouches[0];
+	const deltaX = touch.clientX - touchStart.x;
+	const deltaY = touch.clientY - touchStart.y;
+	touchStart = null;
+	if (Math.abs(deltaX) < 60 || Math.abs(deltaX) < Math.abs(deltaY) * 1.25) return;
+
+	const activeIndex = Array.from(tabs).findIndex((tab) => tab.classList.contains('is-active'));
+	const nextIndex = activeIndex + (deltaX < 0 ? 1 : -1);
+	if (nextIndex < 0 || nextIndex >= tabs.length) return;
+
+	event.preventDefault();
+	tabs[nextIndex].click();
+}, { passive: false });
+
+mainContent.addEventListener('touchcancel', () => {
+	touchStart = null;
+}, { passive: true });
 
 const empresas = [
 	{ nome: 'Ferreira Costa', logo: 'imagens/sobremim/ferreiracosta.png', descricao: 'Atuação em atendimento comercial, treinamento e vendas no varejo e em pontos de atuação em Garanhuns, Recife e Salvador.' },
@@ -425,138 +487,121 @@ const bardahlCategorias = [
 ];
 
 
-// Catálogo PN Stellantis conforme lista fornecida, sem preços.
+// Produtos Stellantis: usar imagens locais apenas quando correspondem ao item.
 bardahlCategorias.push({
   id: 'pn-stellantis',
   nome: 'Stellantis',
   total: 21,
-
   items: [
     {
       codigo: '',
       nome: 'BARDAHL RAD COOL LONG LIFE 35% PRONTO USO ROSA',
-      desc: '',
-      img: 'imagens/produtos/bardahl/.png'
+      desc: ''
     },
     {
       codigo: '',
       nome: 'BARDAHL RAD COOL LONG LIFE 50% PRONTO USO ROSA',
-      desc: '',
-      img: 'imagens/produtos/bardahl/'
+      desc: ''
     },
     {
-      codigo: 'imagens/produtos/bardahl/.png',
+      codigo: '',
       nome: 'BARDAHL RAD COOL LONG LIFE CONCENTRADO ROSA',
       desc: '',
-      img: 'imagens/produtos/bardahl/'
+      img: 'imagens/produtos/bardahl/RAD20COOL.png'
     },
     {
       codigo: '',
       nome: 'BARDAHL RAD COOL PLUS 35% PRONTO PARA USO - VERDE',
       desc: '',
-      img: 'imagens/produtos/bardahl/.png'
+      img: 'imagens/produtos/bardahl/RAD20COOL20PRONTO20PRA20USO201L.png'
     },
     {
       codigo: '',
       nome: 'BARDAHL RAD COOL PLUS CONCENTRADO - VERDE',
-      desc: '',
-      img: 'imagens/produtos/bardahl/.png'
+      desc: ''
     },
     {
       codigo: '',
       nome: 'BARDAHL RAD COOL READY TO USE 50% PRONTO USO - VERDE',
-      desc: '',
-      img: 'imagens/produtos/bardahl/.png'
+      desc: ''
     },
     {
       codigo: '',
       nome: 'BARDAHL RADFLUSH',
-      desc: '',
-      img: 'imagens/produtos/bardahl/.png'
+      desc: ''
     },
     {
       codigo: '',
       nome: 'CLEAN PLUS',
-      desc: '',
-      img: 'imagens/produtos/bardahl/.png'
+      desc: ''
     },
     {
       codigo: '',
       nome: 'DESINGRIPANTE LPP',
-      desc: '',
-      img: 'imagens/produtos/bardahl/.png'
+      desc: ''
     },
     {
       codigo: '',
       nome: 'KIT REVISÃO',
-      desc: '',
-      img: 'imagens/produtos/bardahl/.png'
+      desc: ''
     },
     {
       codigo: '',
       nome: 'LIMPA TBI',
-      desc: '',
-      img: 'imagens/produtos/bardahl/.png'
+      desc: ''
     },
     {
       codigo: '',
       nome: 'LIMPA TUDO',
-      desc: '',
-      img: 'imagens/produtos/bardahl/.png'
+      desc: ''
     },
     {
       codigo: '',
       nome: 'PROMAX AIR CLEANER',
-      desc: '',
-      img: 'imagens/produtos/bardahl/.png'
+      desc: ''
     },
     {
       codigo: '',
       nome: 'PROMAX FLUIDO PARA RADIADORES - PARA DILUIÇÃO ROSA',
-      desc: '',
-      img: 'imagens/produtos/bardahl/.png'
+      desc: ''
     },
     {
       codigo: '',
       nome: 'PROMAX FLUIDO PARA RADIADORES PLUS - PARA DILUIÇÃO VERDE',
-      desc: '',
-      img: 'imagens/produtos/bardahl/.png'
+      desc: ''
     },
     {
       codigo: '',
       nome: 'DESCARBONIZANTE DIESEL',
-      desc: '',
-      img: 'imagens/produtos/bardahl/.png'
+      desc: ''
     },
     {
       codigo: '',
       nome: 'DESCARBONIZANTE FLEX',
-      desc: '',
-      img: 'imagens/produtos/bardahl/.png'
+      desc: ''
     },
     {
       codigo: '',
       nome: 'FUEL SPECIAL CLEANER 6x1',
       desc: '',
-      img: 'imagens/produtos/bardahl/'
+      img: 'imagens/produtos/bardahl/FUEL SPECIAL CLEANER 6 X 1.png'
     },
     {
       codigo: '',
       nome: 'MAX HYBRID',
       desc: '',
-      img: 'imagens/produtos/bardahl/.png'
+      img: 'imagens/produtos/bardahl/MAX20HYBRID.png'
     },
     {
       codigo: '',
       nome: 'MAX S10',
       desc: '',
-      img: 'imagens/produtos/bardahl/.png'
+      img: 'imagens/produtos/bardahl/BARDAHL MAX S10.png'
     },
     {
       codigo: '',
       nome: 'MKT ADITIVO FAP EOLYS POWER FLEX KIT 1 L',
-      desc: '',
-      img: 'imagens/produtos/bardahl/.png'
+      desc: ''
     }
   ]
 });
@@ -597,7 +642,7 @@ bardahlCategorias.forEach((cat) => {
 		const productNumber = isPNStellantis ? '' : (p.codigo || `02${pad(bardahlProductIndex++)}`);
 		card.innerHTML = `
 			<div class="product-image bardahl-product-image" style="background-color:rgb(173,166,31);">
-				${p.img ? `<img src="${p.img}" alt="${p.nome}">` : '<div class="pn-photo-placeholder" role="img" aria-label="Foto do produto ainda não disponível"><strong>BARDAHL</strong><span>Foto em atualização</span></div>'}
+				${p.img ? `<img src="${p.img}" alt="${p.nome}">` : '<div class="pn-photo-placeholder" role="img" aria-label="Imagem do produto ainda não disponível"><strong>BARDAHL</strong><span>Imagem não disponível</span></div>'}
 				${isPNStellantis ? '' : `<span class="product-number">${productNumber}</span>`}
 			</div>
 			<div class="product-info"><div><p class="category">Bardahl</p><h3>${p.nome}</h3>
