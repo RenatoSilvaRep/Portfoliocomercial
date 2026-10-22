@@ -94,39 +94,34 @@ a {
 
 .fixed-tab-navigation {
   position: fixed;
-  right: 0;
-  left: 0;
+  left: 50%;
   bottom: 18px;
   z-index: 12;
-  height: 44px;
-  pointer-events: none;
+  display: flex;
+  gap: 8px;
+  padding: 6px;
+  background: rgba(32, 59, 48, 0.459);
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 999px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .24);
+  transform: translateX(-50%);
+  backdrop-filter: blur(8px);
 }
 
 .fixed-tab-button {
-  position: absolute;
-  top: 0;
   display: grid;
   width: 44px;
   height: 44px;
   padding: 0;
   place-items: center;
   color: #fff;
-  background: rgba(32, 59, 48, .82);
+  background: rgba(32, 59, 48, .92);
   border: 1px solid rgba(255, 255, 255, .22);
   border-radius: 50%;
   box-shadow: 0 4px 16px rgba(0, 0, 0, .24);
   cursor: pointer;
-  pointer-events: auto;
   transition: background-color .2s ease, opacity .2s ease, transform .2s ease;
   backdrop-filter: blur(8px);
-}
-
-.fixed-tab-button[data-tab-previous] {
-  left: 20px;
-}
-
-.fixed-tab-button[data-tab-next] {
-  right: 20px;
 }
 
 .fixed-tab-button:hover:not(:disabled) {
